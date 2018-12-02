@@ -1,9 +1,9 @@
 # Advance Wars JS
 ## Usage
-Clone this repo.
-Run `yarn install` (requires yarn)
-Run `yarn host`
-Navigate to `localhost:8080`
+* Clone this repo.
+* Run `yarn install` (requires yarn)
+* Run `yarn host`
+* Navigate to `localhost:8080`
 
 ## Structure
 Something like this?
