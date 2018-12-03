@@ -22,7 +22,6 @@ export default class Engine {
 
   run(){
     setInterval(() => {
-      console.log(this)
       this.renderer.render()
     }, 2000)
   }

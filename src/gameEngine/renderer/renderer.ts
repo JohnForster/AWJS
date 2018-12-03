@@ -27,7 +27,6 @@ export class Renderer {
   }
 
   loadMap(map:IMap){
-    console.log('loading map...')
     this.bgRenderer.loadMap(map)
   }
 
