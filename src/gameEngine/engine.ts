@@ -8,6 +8,7 @@ export default class Engine {
   cursor: Cursor;
   cursorTile = { x: 1, y: 1 }
 
+  // Temporarily hard coded
   map: number[][] = [
     [0,0,0,1,1,0],
     [0,0,0,1,1,0],
@@ -88,18 +89,16 @@ export default class Engine {
     tempContext.putImageData(this.sprites[id], 0, 0);
     const mapSize = this.getMapSize(this.map, {x:16, y:16})
     const top = { x: Math.ceil((this.canvas.width - mapSize.x) / 2), y: 20 };
-    const x = cursorTile.x * 16 + top.x - 3
+    const x = cursorTile.x * 16 + top.x - 3 // Cursor square is 6 pixels wider/taller than a tile, 3 on each side
     const y = cursorTile.y * 16 + top.y - 3
     this.context.drawImage(tempCanvas, x, y)
   }
-
-
 
   static addImageProcess(src: string) {
     return new Promise((resolve, reject) => {
       const img:HTMLImageElement = new Image();
       img.onload = () => resolve(img);
-      img.onerror = reject;
+      img.onerror = () => reject();
       img.src = src;
     });
   }
@@ -112,6 +111,4 @@ export default class Engine {
     tempContext.drawImage(image, 0, 0)
     return tempContext.getImageData(topLeftX, topLeftY, width, height)
   }
-
-
 }
