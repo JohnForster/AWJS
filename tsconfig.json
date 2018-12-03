@@ -11,5 +11,8 @@
       "dom",
       "es7"
     ]
-  }
+  },
+  "exclude": [
+    "src/gameEngine/renderer"
+  ]
 }

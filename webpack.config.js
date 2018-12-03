@@ -21,7 +21,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: [/node_modules/, /renderer/] // Temporarily exclude renderer folder while architecture is being sorted
+        exclude: /(node_modules|src\/renderer)/ // Temporarily exclude renderer folder while architecture is being sorted
       }
     ]
   },

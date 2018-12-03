@@ -1,39 +1,39 @@
-interface IMapObject{}
-interface ITileData {id:number, name:string, x:number, y:number, w:number, h:number}
-interface ITileSheetData {image: HTMLImageElement, ids: ITileData[]}
+import { ISpritesheetData, ISpriteData } from './ISpritesheetData'
+import { IMap } from './IMap'
 
-export class BgRenderer{
+export class BgRenderer {
   tileSheet: HTMLImageElement;
-  map: IMapObject;
-  tileIds: ITileData[];
+  map: IMap;
+  tileData: ISpriteData[];
   mapCanvas: HTMLCanvasElement;
   // Animation frame?
 
-  constructor (tileSheetData: ITileSheetData) {
+  constructor (tileSheetData: ISpritesheetData) {
     this.tileSheet = tileSheetData.image
-    this.tileIds = tileSheetData.ids
+    this.tileData = tileSheetData.data.sprites
   }
 
-  renderMap(map?: IMapObject) {
+  render(map?: IMap) {
     if (map) this.map = map
     if (!this.map) throw new Error ('No map to render.')
     return this.draw()
   }
 
+  loadMap(map: IMap){
+    this.map = map
+  }
+
+  // TODO Need imageData for tiles. ImageLoader class?
   private draw(){
     const tempCanvas: HTMLCanvasElement = document.createElement('canvas');
     const tempContext: CanvasRenderingContext2D = tempCanvas.getContext('2d');
-    const tileSize = { x:16, y:16}
-    this.map.forEach((row, rowNumber) => {
+    this.map.data.forEach((row, rowNumber) => {
       row.forEach((id, colNumber) => {
-        const x = (colNumber * tileSize.x)
-        const y = (rowNumber * tileSize.y)
-        tempContext.putImageData(this.sprites[id], x, y)
+        const x = (colNumber * this.tileData[id].w)
+        const y = (rowNumber * this.tileData[id].h)
+        tempContext.putImageData(this.tileData[id].imageData, x, y)
       })
     })
-    const mapSize = this.getMapSize(map, tileSize)
-    const top = { x: Math.ceil((this.canvas.width - mapSize.x) / 2), y: 20 };
-    // this.context.drawImage(tempCanvas, top.x, top.y)
     this.mapCanvas = tempCanvas // Store mapCanvas so recreating the canvas every frame isn't necessary?
     return tempCanvas
   }
