@@ -1,11 +1,11 @@
 import { BgRenderer } from "./bgRenderer";
-import { ISpritesheetData, ISpriteData } from './ISpritesheetData'
 import { IMap } from './IMap'
+import { SpritesheetLoader } from "./spritesheetLoader";
+
 
 
 // pass config into renderer constructor instead of hard coding dependency?
 import { terrainsheetData } from './terrainSheetData'
-import { SpritesheetLoader } from "./spritesheetLoader";
 
 // Currently Unimplemented
 export class Renderer {

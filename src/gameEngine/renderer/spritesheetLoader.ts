@@ -2,21 +2,27 @@ import { ISpritesheetData, ISpriteData } from "./ISpritesheetData";
 
 // Generalise to ImageLoader?
 export class SpritesheetLoader {
+
   static async load(spritesheetData: ISpritesheetData) {
     const spritesheet = <HTMLImageElement> await SpritesheetLoader.addImageProcess(spritesheetData.path)
     const tempContext = SpritesheetLoader.getContext(spritesheet)
     spritesheetData.data.sprites.forEach((sprite) => {
-      sprite.imageData = SpritesheetLoader.getImageData( sprite, tempContext)
+      sprite.imageData = SpritesheetLoader.getImageData(sprite, tempContext)
     })
   }
 
   static getContext(image: HTMLImageElement){
-    const canvas = document.createElement('canvas')
+    const canvas = SpritesheetLoader.setupCanvas(image)
     const context = canvas.getContext('2d');
-    canvas.width = image.width;
-    canvas.height = image.height;
     context.drawImage(image, 0, 0)
     return context
+  }
+
+  static setupCanvas(image:HTMLImageElement) {
+    const canvas:HTMLCanvasElement = document.createElement('canvas')
+    canvas.width = image.width;
+    canvas.height = image.height;
+    return canvas
   }
 
   static addImageProcess(src: string) {

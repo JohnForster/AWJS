@@ -1,4 +1,4 @@
-// Separate these interfaces into multiple classes?
+// Separate these interfaces into multiple files?
 
 export interface ISpritesheetData {
   path: string,
