@@ -2,8 +2,8 @@
 
 ## Structure
 Something like this?
-* Engine (Responsible for drawing to screen, UI, rendering sprites etc. What the user interacts with)
-* Game (Where the main logic and data resides, contains the rules that the Engine has to abide by)
+* Engine (Responsible for drawing to screen, UI, rendering sprites etc. What the user interacts with) (Client side eventually)
+* Game (Where the main logic and data resides, contains the rules that the Engine has to abide by) (Server side eventually)
 * Server
 * AI
 
@@ -14,3 +14,24 @@ Split into:
 
 ### Game
 
+
+
+## TODO
+* Engine
+  * Refactor Engine into Renderer and Controller
+  * Move cursor around map
+  * Draw units to canvas
+  * Select units with cursor
+  * Split spritesheet into multiple sheets (inc. dealing with transparency)
+  * Import more tiledata from spritesheet
+  * Rework how tile/sprite data is loaded/stored
+    * Store tiledata along with name etc. in a JSON
+    * Store spritedata along with name etc. in a JSON?
+  * Refactor refactor refactor
+
+* Game
+  * Units move
+  * Unit class
+  * Terrain class?
+  * Damage Calculation
+  * 

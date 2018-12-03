@@ -1,8 +1,12 @@
+import { Cursor } from './cursor'
+
 export default class Engine {
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
-  ticksPerSecond: number = 30; // set ticksPerSecond in config?
+  ticksPerSecond: number = 0.5; // set ticksPerSecond in config?
   sprites: ImageData[] = [];
+  cursor: Cursor;
+  cursorTile = { x: 1, y: 1 }
 
   map: number[][] = [
     [0,0,0,1,1,0],
@@ -14,10 +18,10 @@ export default class Engine {
   ]
   
   constructor () {
+    // Inject cursor dependency?
     this.canvas = this.setupCanvas();
     this.context = this.canvas.getContext('2d')
-    console.log(this.context)
-    // load images etc.
+    this.cursor = new Cursor
   }
 
   private setupCanvas(): HTMLCanvasElement {
@@ -29,21 +33,21 @@ export default class Engine {
 
   async run () {
     await this.loadSprites()
-    console.log(this.context)
     this.gameTick()
-    // setInterval(this.gameTick, 1000/this.ticksPerSecond) // setInterval changes 'this'
+    setInterval(this.gameTick.bind(this), 1000/this.ticksPerSecond)
   }
 
   async loadSprites () {
+    // Write generic method for this?
     let spriteSheet: HTMLImageElement
-    await Engine.addImageProcess('./src/assets/spriteSheet.png').then((res) => {
-      console.log('Res type = ' + typeof res)
-      if (res instanceof HTMLImageElement){
-        spriteSheet = res
-      }
-    })
+    let UISprites: HTMLImageElement
+    await Engine.addImageProcess('assets/spriteSheet.png')
+    .then(res => spriteSheet = <HTMLImageElement>res)
+    await Engine.addImageProcess('assets/UISprites.png')
+    .then(res => UISprites = <HTMLImageElement>res)
     this.sprites.push(Engine.getImageData(spriteSheet, 217, 1567, 16, 16)) // grass
     this.sprites.push(Engine.getImageData(spriteSheet, 340, 1567, 16, 16)) // sea
+    this.sprites.push(Engine.getImageData(UISprites, 44, 6, 28, 31)) // cursor
   }
 
   private async gameTick () {
@@ -54,22 +58,39 @@ export default class Engine {
     // this.renderer.drawUnits(units)
     // TODO move into renderer class.
     this.printMap(this.map)
+    this.printCursor(this.cursor.position, 2)
+    this.cursor.moveDown()
   }
 
   private printMap (map: number[][]) {
     const tempCanvas: HTMLCanvasElement = document.createElement('canvas');
     const tempContext: CanvasRenderingContext2D = tempCanvas.getContext('2d');
-    const top = { x: Math.ceil(this.canvas.width / 2), y: 20 };
-    const tileWidth = 16
-    const tileHeight = 16
+    const tileSize = { x:16, y:16}
     map.forEach((row, rowNumber) => {
       row.forEach((id, colNumber) => {
-        const x = colNumber * tileWidth
-        const y = rowNumber * tileHeight
+        const x = (colNumber * tileSize.x)
+        const y = (rowNumber * tileSize.y)
         tempContext.putImageData(this.sprites[id], x, y)
-        this.context.drawImage(tempCanvas, x, y)
       })
     })
+    const mapSize = this.getMapSize(map, tileSize)
+    const top = { x: Math.ceil((this.canvas.width - mapSize.x) / 2), y: 20 };
+    this.context.drawImage(tempCanvas, top.x, top.y)
+  }
+
+  private getMapSize(map: number[][], tileSize: { x: number; y: number; }) {
+    return { x: (map.length * tileSize.x), y: (map[0].length * tileSize.y) };
+  }
+
+  private printCursor(cursorTile:any, id:number) {
+    const tempCanvas: HTMLCanvasElement = document.createElement('canvas');
+    const tempContext: CanvasRenderingContext2D = tempCanvas.getContext('2d');
+    tempContext.putImageData(this.sprites[id], 0, 0);
+    const mapSize = this.getMapSize(this.map, {x:16, y:16})
+    const top = { x: Math.ceil((this.canvas.width - mapSize.x) / 2), y: 20 };
+    const x = cursorTile.x * 16 + top.x - 3
+    const y = cursorTile.y * 16 + top.y - 3
+    this.context.drawImage(tempCanvas, x, y)
   }
 
 
