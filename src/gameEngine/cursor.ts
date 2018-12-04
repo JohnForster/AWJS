@@ -5,6 +5,7 @@ interface IPosition {
 
 export class Cursor {
   position: IPosition;
+  imageData: ImageData;
 
   constructor () {
     // Store image data in cursor class or only position data?
@@ -38,5 +39,11 @@ export class Cursor {
   }
   moveRight(){
     this.position.x += 1
+  }
+
+  getTopLeftPixelCoordinates(){
+    const x = this.position.x * 16 - 3
+    const y = this.position.y * 16 - 3
+    return {x, y}
   }
 }

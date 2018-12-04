@@ -5,6 +5,8 @@ export default class Controller {
   cursor: Cursor
 
   // This allows us to easily change the keybindings programatically
+  // Could reverse order, so that actions can be looked up via keycode rather
+  // Than the other way round? Allows for a generic handleKeyPress method?
   keyMappings: {[keyName: string]: number} = {
     upCode: 87,   // W
     downCode: 83, // S
@@ -25,8 +27,8 @@ export default class Controller {
     // This method allows multiple keys to be pressed at once.
     // Stores an object of {<keyCode>: true, <keyCode2>: false} for example.
     const pressedKeys: {[key: number]: boolean} = {}
-    // double or triple equals?
     pressedKeys[e.keyCode] = e.type === 'keydown'
+
     const {upCode, downCode, leftCode, rightCode} = this.keyMappings
     if (pressedKeys[upCode]) this.cursor.move('up')
     if (pressedKeys[downCode]) this.cursor.move('down')

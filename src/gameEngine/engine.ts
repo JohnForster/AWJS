@@ -3,6 +3,7 @@ import { IMap } from './renderer/IMap'
 import Controller from './controller/controller';
 import { Cursor } from './cursor';
 
+const TICKS_PER_SECOND: number = 30
 const map: IMap = {
   data: [
     [0,0,0,1,1,0],
@@ -21,15 +22,16 @@ export default class Engine {
 
 
   constructor(){
-    this.renderer = new Renderer
-    this.renderer.loadMap(map)
     this.cursor = new Cursor
+    this.renderer = new Renderer(this.cursor)
     this.controller = new Controller(this.cursor)
+    this.renderer.loadMap(map)
+
   }
 
   run(){
     setInterval(() => {
       this.renderer.render()
-    }, 2000)
+    }, 1000 / TICKS_PER_SECOND)
   }
 }
