@@ -15,7 +15,18 @@ export class Cursor {
     this.position.x = x
     this.position.y = y
   }
-  
+
+  move(direction: string){
+    direction = direction.toLowerCase()
+    // Use a switch statement/object literal for this?
+    if (direction === 'up') this.moveUp()
+    if (direction === 'down') this.moveDown()
+    if (direction === 'left') this.moveLeft()
+    if (direction === 'right') this.moveRight()
+    console.log(this.position)
+  }
+
+  // remove the below statements and only use .move('direction')? Or visa versa? Make private?
   moveUp(){
     this.position.y -= 1
   }

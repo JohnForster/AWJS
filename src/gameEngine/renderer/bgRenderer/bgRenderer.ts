@@ -1,5 +1,5 @@
-import { ISpritesheetData, ISpriteData } from './ISpritesheetData'
-import { IMap } from './IMap'
+import { ISpritesheetData, ISpriteData } from '../spritesheets/ISpritesheetData'
+import { IMap } from '../IMap'
 
 export class BgRenderer {
   tileSheet: HTMLImageElement;
@@ -16,6 +16,7 @@ export class BgRenderer {
   render(map?: IMap) {
     if (map) this.map = map
     if (!this.map) throw new Error ('No map to render.')
+    if (!map && this.mapCanvas) return this.mapCanvas
     return this.draw(map)
   }
 
@@ -24,7 +25,6 @@ export class BgRenderer {
   }
 
   private draw(map?: IMap){
-    if (!map && this.mapCanvas) return this.mapCanvas
     const tempCanvas: HTMLCanvasElement = document.createElement('canvas');
     const tempContext: CanvasRenderingContext2D = tempCanvas.getContext('2d');
     this.map.data.forEach((row, rowNumber) => {
