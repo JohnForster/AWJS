@@ -57,3 +57,17 @@ sub, copter, plane.
 Likewise, there are charts of terrain fuel costs per "traversal category":
 infantry, mech, tires, tracks, air, ship, lander.
 
+## Players
+
+A player/faction has:
+
+- Funds
+- Properties, incl. HQ
+- Units
+
+## Terrain
+
+A terrain type has:
+
+- Defence rating provided
+- Traversal cost to different unit types
