@@ -1,5 +1,5 @@
-import { Renderer } from './renderer/renderer'
-import { IMap } from './renderer/IMap'
+import { Renderer } from './view/renderer'
+import { IMap } from './view/IMap'
 import Controller from './controller/controller';
 import { Cursor } from './cursor';
 
@@ -18,18 +18,16 @@ const map: IMap = {
 export default class Engine {
   renderer: Renderer;
   controller: Controller;
-  cursor: Cursor
+  cursor: Cursor;
 
-
-  constructor(){
+  constructor () {
     this.cursor = new Cursor
     this.renderer = new Renderer(this.cursor)
     this.controller = new Controller(this.cursor)
     this.renderer.loadMap(map)
-
   }
 
-  run(){
+  run () {
     setInterval(() => {
       this.renderer.render()
     }, 1000 / TICKS_PER_SECOND)

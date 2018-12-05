@@ -3,36 +3,52 @@ import { Cursor } from "../cursor";
 
 export default class Controller {
   cursor: Cursor
+  pressedKeys: {[keyname: number]: boolean}
 
   // This allows us to easily change the keybindings programatically
   // Could reverse order, so that actions can be looked up via keycode rather
   // Than the other way round? Allows for a generic handleKeyPress method?
-  keyMappings: {[keyName: string]: number} = {
-    upCode: 87,   // W
-    downCode: 83, // S
-    leftCode: 65, // A
-    rightCode: 68 // D
+  // keyMappings: {[keyName: string]: number} = {
+  //   upCode: 87,   // W
+  //   downCode: 83, // S
+  //   leftCode: 65, // A
+  //   rightCode: 68, // D
+  // }
+
+  keyMappings: {[keyname: number]: string} = {
+    87: 'up', // w
+    83: 'down', // s
+    65: 'left', // a
+    68: 'right', // d
   }
 
   // Extend to use GameObject instead of Cursor so multiple things can be moved?
   // GameObject could be an interface that uses a move method?
   constructor(cursor: Cursor) {
+    this.pressedKeys = {}
     this.cursor = cursor;
     this.handleKeyPress = this.handleKeyPress.bind(this);
-    document.onkeypress = document.onkeydown = this.handleKeyPress;
+    document.onkeydown = document.onkeyup = this.handleKeyPress;
   }
 
   // TODO extract keybindings to config file
   handleKeyPress(e: KeyboardEvent) {
     // This method allows multiple keys to be pressed at once.
     // Stores an object of {<keyCode>: true, <keyCode2>: false} for example.
-    const pressedKeys: {[key: number]: boolean} = {}
-    pressedKeys[e.keyCode] = e.type === 'keydown'
+    
+    this.pressedKeys[e.keyCode] = (e.type === 'keydown')
+    console.log()
+    for (let keyCode in this.pressedKeys){
+      // Skip this loop if the key is from prototype
+      if (!this.pressedKeys.hasOwnProperty(keyCode)) continue;
+      console.log(this.pressedKeys)
 
-    const {upCode, downCode, leftCode, rightCode} = this.keyMappings
-    if (pressedKeys[upCode]) this.cursor.move('up')
-    if (pressedKeys[downCode]) this.cursor.move('down')
-    if (pressedKeys[leftCode]) this.cursor.move('left')
-    if (pressedKeys[rightCode]) this.cursor.move('right')
+      if (this.pressedKeys[keyCode] && this.keyMappings[keyCode]) {
+        // After UIModel is written, this line will look something like:
+        // if (pressedKeys[keyCode]) controller.send(this.keyMappings[keyCode])
+        // with some interface to change the 'up' string to the appropriate UIModel.up() method
+        this.cursor.move(this.keyMappings[keyCode])
+      }
+    }
   }
 }

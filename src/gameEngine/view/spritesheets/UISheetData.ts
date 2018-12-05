@@ -1,6 +1,6 @@
 import {ISpritesheetData} from './ISpritesheetData'
 // Store these files in assets with their images?
-export const UISheetData: ISpritesheetData  = {
+export const uisheetData: ISpritesheetData  = {
   path: 'assets/UISprites.png',
   data: {
     type: 'UI',

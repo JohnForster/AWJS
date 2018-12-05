@@ -3,11 +3,13 @@ import { ISpritesheetData, ISpriteData } from "../spritesheets/ISpritesheetData"
 // Generalise to ImageLoader?
 export class SpritesheetLoader {
 
-  static async load(spritesheetData: ISpritesheetData) {
+  static async load(...spritesheetDataArray: ISpritesheetData[]) {
+    spritesheetDataArray.forEach(async (spritesheetData) => {
     const spritesheet = <HTMLImageElement> await SpritesheetLoader.addImageProcess(spritesheetData.path)
     const tempContext = SpritesheetLoader.getContext(spritesheet)
-    spritesheetData.data.sprites.forEach((sprite) => {
-      sprite.imageData = SpritesheetLoader.getImageData(sprite, tempContext)
+      spritesheetData.data.sprites.forEach((sprite) => {
+        sprite.imageData = SpritesheetLoader.getImageData(sprite, tempContext)
+      })
     })
   }
 

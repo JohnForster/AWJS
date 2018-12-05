@@ -17,6 +17,10 @@ All unit types have:
 - Fuel costs per terrain type (or inability to traverse them)
 - Kind(s) of building that can create/resupply/repair it
 - Cost
+- Maximum fuel
+
+Some unit types have:
+- Maximum ammo , (if applicable)
 
 All unit instances have:
 

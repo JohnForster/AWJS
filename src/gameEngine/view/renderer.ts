@@ -5,8 +5,8 @@ import { SpritesheetLoader } from "./spriteSheetLoader/spritesheetLoader";
 
 // pass config into renderer constructor instead of hard coding dependency?
 import { terrainsheetData } from './spritesheets/terrainSheetData'
-import { UISheetData } from './spritesheets/UISheetData'
-import { Cursor } from "../cursor";
+import { uisheetData } from './spritesheets/UISheetData'
+import { Cursor } from '../cursor'
 
 // Currently Unimplemented
 export class Renderer {
@@ -22,12 +22,11 @@ export class Renderer {
   constructor(cursor: Cursor) {
     this.gameCanvas = this.setupMainCanvas();
     this.gameContext = this.gameCanvas.getContext('2d')
-    SpritesheetLoader.load(terrainsheetData)
-    SpritesheetLoader.load(UISheetData)
+    SpritesheetLoader.load(terrainsheetData, uisheetData)
     this.bgRenderer = new BgRenderer(terrainsheetData)
-    this.uiRenderer = new UIRenderer(cursor, UISheetData)
+    this.uiRenderer = new UIRenderer(cursor, uisheetData)
     // this.unitRenderer = new UnitRenderer()
-    // effects renderer? etc.
+    // effects renderer? etc?.,.
   }
 
   loadMap(map:IMap){
@@ -38,7 +37,6 @@ export class Renderer {
     this.gameContext.clearRect(0, 0, this.gameCanvas.width, this.gameCanvas.height)
     // Map, gamestate and ui state required
     // Perhaps have each of these methods return a canvas which can then be drawn in the main renderer?
-    console.log(this)
     const canvases = this.getCanvases(this.bgRenderer, this.uiRenderer)//, this.unitRenderer)
     canvases.forEach((canvas) => {
       // change 0,0 to topLeft adjustment?

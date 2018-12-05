@@ -26,7 +26,7 @@ export class UIRenderer {
     return this.draw()
   }
 
-  draw(): HTMLCanvasElement {
+  private draw(): HTMLCanvasElement {
     const cursorID = 0 // THIS SHOULD NOT BE HARD CODED
     const tempCanvas: HTMLCanvasElement = document.createElement('canvas')
     const tempContext: CanvasRenderingContext2D = tempCanvas.getContext('2d')
@@ -39,6 +39,4 @@ export class UIRenderer {
     this.cursorCanvas = tempCanvas
     return tempCanvas
   }
-
-
 }
