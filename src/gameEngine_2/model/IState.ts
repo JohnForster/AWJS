@@ -1,1 +1,3 @@
-interface IState {}
+interface IState {
+  idGrid: number[][]
+}

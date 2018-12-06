@@ -13,6 +13,6 @@
     ]
   },
   "exclude": [
-    "src/gameEngine/renderer"
+    "src/gameEngine/"
   ]
 }

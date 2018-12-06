@@ -1,8 +1,8 @@
-import Engine from '../gameEngine/engine'
+import Engine from '../gameEngine_2/engine'
 
 export default new class App {
   run () {
     const engine = new Engine()
-    engine.run()
+    console.log('Engine set up')
   }
 }

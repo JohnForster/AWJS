@@ -5,5 +5,16 @@ export default class Mediator implements LogicModel {
   constructor(){
     this.logicModel = new LogicModel
   }
-  getState():IState{return}
+  getState():IState{
+    return {
+      idGrid: [
+        [1,1,0,1,0,1],
+        [1,1,0,1,0,1],
+        [1,1,0,1,0,1],
+        [1,1,0,1,0,1],
+        [1,1,0,1,0,1],
+        [1,1,0,1,0,1],
+      ]
+    }
+  }
 }
