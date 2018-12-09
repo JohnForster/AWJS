@@ -1,3 +1,4 @@
 interface IState {
-  idGrid: number[][]
+  idGrid?: number[][],
+  nonGridElements?: {id:number, x: number, y: number}[],
 }

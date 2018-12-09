@@ -25,10 +25,12 @@ export default class Subrenderer {
     // Cycle through the state's idGrid and render each sprite to the context
     state.idGrid.forEach((row, rowNumber) => {
       row.forEach((id, colNumber) => {
-        const sprite = this.sprites[id]
-        const x = colNumber * sprite.w
-        const y = rowNumber * sprite.h
-        this.context.putImageData(sprite.imageData, x, y)
+        if (state.idGrid[rowNumber][colNumber] !== undefined){
+          const sprite = this.sprites[id]
+          const x = colNumber * 16 + (sprite.ax || 0) // Tile width (get from where?)
+          const y = rowNumber * 16 + (sprite.ay || 0)
+          this.context.putImageData(sprite.imageData, x, y)
+        }
       })
     })
 

@@ -15,12 +15,7 @@ export default class Controller {
   //   rightCode: 68, // D
   // }
 
-  keyMappings: {[keyname: number]: string} = {
-    87: 'up', // w
-    83: 'down', // s
-    65: 'left', // a
-    68: 'right', // d
-  }
+
 
   // Extend to use GameObject instead of Cursor so multiple things can be moved?
   // GameObject could be an interface that uses a move method?
