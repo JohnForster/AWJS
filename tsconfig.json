@@ -10,9 +10,10 @@
     "lib": [
       "dom",
       "es7"
-    ]
+    ],
+    "downlevelIteration": true,
   },
   "exclude": [
-    "src/gameEngine/"
+    "src/zOldGameEngine/",
   ]
 }

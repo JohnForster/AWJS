@@ -6,18 +6,18 @@ const terrainsheetData: ISpritesheetData = {
     type: 'terrain',
     sprites: {
       0: {
-        name: 'grass',
-        x: 217, 
-        y: 1567, 
-        w: 16, 
-        h: 16, 
-      },
-      1: {
         name: 'sea',
         x: 340,
         y: 1567,
         w: 16,
         h: 16
+      },
+      1: {
+        name: 'grass',
+        x: 217, 
+        y: 1567, 
+        w: 16, 
+        h: 16, 
       },
       // etc. etc.
     }

@@ -1,15 +1,17 @@
 import LogicModel from "../logicModel/logicModel";
 import UIObject from "./uiObjects/uiObject";
 import Cursor from "./uiObjects/cursor/cursor";
+import IScreenObjects from "../IScreenObjects";
+import IGameState from "../logicModel/IGameState";
 
 // This class is responsible for manipulating the UI state. Moving cursor around,
 //  selecting units, checking units etc.
 
-
+// This code is bad.
 export default class UIModel{
   // TODO Where do we get the grid size from?
-  currentUIState: IState = {idGrid: Array.from(Array(32), x => Array(32))}
-  gameState: IState
+  currentUIState: IScreenObjects = { gridElements: Array.from(Array(32), x => Array(32))}
+  gameState: IGameState
   selectedObject: UIObject;
   objects: UIObject[] = [];
   cursor: UIObject;
@@ -26,7 +28,7 @@ export default class UIModel{
     this.selectedObject.sendInstruction(instruction)
     const {x, y} = this.selectedObject.position
     this.refreshState()
-    this.currentUIState.idGrid[y][x] = this.selectedObject.id // Awful code
+    this.currentUIState.gridElements[y][x] = this.selectedObject.id // Awful code
   }
 
 
@@ -39,7 +41,7 @@ export default class UIModel{
   }
 
   refreshState () {
-    this.currentUIState.idGrid = Array.from(Array(32), x => Array(32))
+    this.currentUIState.gridElements = Array.from(Array(32), x => Array(32))
 
     this.objects = this.objects.sort((a, b) => {
       return a.position.z - b.position.z
@@ -47,11 +49,11 @@ export default class UIModel{
     this.objects.forEach((uiObject) => {
       const { x, y } = uiObject.position
       // Check if at integer position, and render to state differently? (See IState interface)
-      this.currentUIState.idGrid[y][x] = uiObject.id
+      this.currentUIState.gridElements[y][x] = uiObject.id
     })
   }
 
-  getState ():IState {
+  getState ():IScreenObjects {
     return this.currentUIState
   }
 

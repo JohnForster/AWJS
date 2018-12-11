@@ -1,28 +1,30 @@
-enum unitType {
-  infantary,
-  vehicle,
-  helicopter,
-  plane,
-  ship,
-  submarine,
+// move exports to separate files?
+
+export enum unitKind {
+  'infantary',
+  'vehicle',
+  'helicopter',
+  'plane',
+  'ship',
+  'submarine',
 }
 
-enum weaponType {
-  direct,
-  indirect,
+export enum weaponType {
+  'direct',
+  'indirect',
 }
 
-enum unitAbility {
-  capture,
-  dive,
-  load,
+export enum unitAbility {
+  'capture',
+  'dive',
+  'load',
 }
-
-interface IUnit {
+// Static properties
+export interface IUnit {
   id: number,
   name: string,
   totalHealth: number,
-  type: unitType,
+  type: unitKind,
   visionRange: number,
   movementRange: number,
   maxFuel: number,

@@ -1,35 +1,44 @@
-import { Renderer } from './view/renderer'
-import { IMap } from './view/IMap'
-import Controller from './controller/controller';
-import { Cursor } from './cursor';
+import View from './view/view'
+import Controller from './controller/controller'
+import UIModel from './model/uiModel/uiModel'
+import Mediator from './model/logicModel/mediator/mediator'
+import ImageLoader from './view/subrenderers/imageLoader/imageLoader';
+import LogicModel from './model/logicModel/logicModel';
 
-const TICKS_PER_SECOND: number = 30
-const map: IMap = {
-  data: [
-    [0,0,0,1,1,0],
-    [0,0,0,1,1,0],
-    [0,0,1,1,1,0],
-    [0,1,1,1,1,0],
-    [0,0,0,1,1,0],
-    [1,1,0,1,1,1],
-  ]
-}
+// Load spritesheetData by config?
+import terrainsheetData from '../assets/terrain/terrainsheetData'
+import uisheetData from '../assets/ui/uiSheetData'
+import unitsheetData from '../assets/units/unitsheetData'
 
 export default class Engine {
-  renderer: Renderer;
+  view: View;
   controller: Controller;
-  cursor: Cursor;
-
+  uiModel: UIModel;
+  logicModel: LogicModel;
   constructor () {
-    this.cursor = new Cursor
-    this.renderer = new Renderer(this.cursor)
-    this.controller = new Controller(this.cursor)
-    this.renderer.loadMap(map)
+    // this could be `new LogicModel()` in a local version, as mediator will implement the LogicModel interface
+    this.logicModel = new Mediator()
+    this.uiModel = new UIModel(this.logicModel)
+
+    this.view = new View(this.logicModel, this.uiModel, {terrain: terrainsheetData, ui: uisheetData, units: unitsheetData}) // get spritesheet data from a config file?
+    this.controller = new Controller(this.uiModel) // And this.view if using mouse input?
+
+    this.performAsyncSetup()
   }
 
-  run () {
+  async performAsyncSetup() {
+    // Call and await all initial async functions here.
+    // Eg. this.view.loadSpritesheets()
+    await Promise.all([
+      ImageLoader.load(terrainsheetData, uisheetData, unitsheetData)
+      // Any other async set up functions
+    ])
+    this.runGame()
+  }
+
+  runGame(){
     setInterval(() => {
-      this.renderer.render()
-    }, 1000 / TICKS_PER_SECOND)
+      this.view.render()
+    }, 1000 / 30)
   }
 }
