@@ -1,6 +1,6 @@
 import ISpritesheetData from '../ISpritesheetData'
 // Store these files in assets with their images?
-const unitsheetData: ISpritesheetData  = {
+const unitsheetData: ISpritesheetData = {
   path: 'assets/units/unitSprites.png',
   data: {
     type: 'units',
@@ -20,8 +20,8 @@ const unitsheetData: ISpritesheetData  = {
         y: 6,
         w: 13,
         h: 13,
-        ax: 1,
-        ay: 3,
+        ax: 2,
+        ay: 1,
       },
     }
   }

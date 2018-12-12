@@ -9,7 +9,7 @@ export default class Cursor extends UIObject {
     down: () => { this.moveDown() },
     left: () => { this.moveLeft() },
     right: () => { this.moveRight() },
-    A: () => {},
+    A: () => { this.uiModel.select(this.uiModel.hoveredUnit) },
     B: () => {},
     L: () => {},
     R: () => {},

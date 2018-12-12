@@ -37,6 +37,12 @@ export default class ImageLoader {
 
   static getImageData (sprite: ISpritesheetData['data']['sprites'][0], context:CanvasRenderingContext2D):ImageData {
     const {x, y, w, h} = sprite
-    return context.getImageData(x, y, w, h)
+    let imageData = context.getImageData(x, y, w, h)
+    if (sprite.alpha) {
+      for (let i = 3; i < imageData.data.length; i += 4) {
+        imageData.data[i] = sprite.alpha
+      }
+    }
+    return imageData
   }
 }

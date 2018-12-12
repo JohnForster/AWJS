@@ -1,4 +1,7 @@
+import UIModel from "../uiModel";
+
 export default abstract class UIObject {
+  uiModel: UIModel
   position: {
     x: number,
     y: number,
@@ -20,8 +23,10 @@ export default abstract class UIObject {
     select: () => {},
   }
 
-  constructor(x:number, y:number, z:number, ...args:any) {
-    this.position = {x: x, y: y, z: z}
+
+  constructor(uiModel: UIModel, x:number, y:number, z:number, ...args:any) {
+    this.uiModel = uiModel
+    this.position = { x, y, z }
     this.init(args)
   }
 

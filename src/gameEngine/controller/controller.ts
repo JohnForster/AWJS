@@ -14,6 +14,7 @@ export default class Controller {
   constructor(uiModel: UIModel){
     this.uiModel = uiModel
     document.onkeypress = this.handleKeyPress.bind(this)
+    document.onkeyup = this.handleKeyUp.bind(this)
   }
 
   handleKeyPress(e: KeyboardEvent){
@@ -23,5 +24,9 @@ export default class Controller {
     if(input){
       this.uiModel.send(input)
     }
+  }
+
+  handleKeyUp(){
+    this.uiModel.send()
   }
 }

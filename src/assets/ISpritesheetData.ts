@@ -14,6 +14,7 @@ export default interface ISpritesheetData {
         h: number,
         ax?: number,
         ay?: number,
+        alpha?: number,
         imageData?: ImageData,
       }
     }

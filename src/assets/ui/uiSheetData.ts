@@ -13,6 +13,16 @@ const uisheetData: ISpritesheetData  = {
         h: 31,
         ax: -3,
         ay: -3,
+      },
+      1: {
+        name: 'attack_overlay',
+        x: 7,
+        y: 10,
+        w: 16,
+        h: 16,
+        ax: 0,
+        ay: 0,
+        alpha: 128,
       }
     }
   }
