@@ -4,6 +4,7 @@
 * Run `yarn install` (requires yarn)
 * Run `yarn host`
 * Navigate to `localhost:8080`
+* WASD to move around, space to select stuff
 
 ## Structure
 Something like this?
