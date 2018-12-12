@@ -30,7 +30,6 @@ export default class UIModel{
   }
 
   send (instruction?:string){
-
     if (instruction) this.focussedObject.sendInstruction(instruction)
     // const {x, y} = this.focussedObject.position
     this.refreshState()
@@ -84,10 +83,10 @@ export default class UIModel{
     // This will need to be replaced with the path-finding algorithm when it's written
     const range = unit.type.movementRange
     for (let v:number = -range; v <= range; v++ ) {
-      const h = range - Math.abs(v)
-      for (let j:number = -h; j <= h; j++){
-        if (unit.gridPosX + j >= 0 && unit.gridPosY + v >= 0){
-          this.objects.push(new RangeIndicator(this, unit.gridPosX + j, unit.gridPosY + v, 1))
+      const horizontalRange = range - Math.abs(v)
+      for (let h:number = -horizontalRange; h <= horizontalRange; h++){
+        if (unit.gridPosX + h >= 0 && unit.gridPosY + v >= 0){
+          this.objects.push(new RangeIndicator(this, unit.gridPosX + h, unit.gridPosY + v, 1))
         }
       }
     }

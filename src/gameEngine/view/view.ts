@@ -62,7 +62,6 @@ export default class View {
   }
 
   private renderUI(uiState: IScreenObjects): HTMLCanvasElement {
-    console.log(uiState)
     return this.uiRenderer.render(uiState)
   }
 
