@@ -5,7 +5,6 @@ import Player from '../player/player';
 import Unit from '../unit/unit';
 import tank from '../../../../resources/units/tank';
 
-
 const myPlayer = new Player()
 
 export default class Mediator implements LogicModel {

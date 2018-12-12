@@ -18,11 +18,16 @@ export enum unitAbility {
   'capture',
   'dive',
   'load',
+  'supply',
+  'unload',
+  'join', // ? Does this count? Every unit can join.
 }
+
 // Static properties
 export interface IUnit {
   id: number,
   name: string,
+  cost: number,
   totalHealth: number,
   type: unitKind,
   visionRange: number,

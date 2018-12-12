@@ -23,6 +23,7 @@ export default class Unit {
     this.currentFuel = unitType.maxFuel
     this.currentAmmo = unitType.maxAmmo
   }
+  
   // Or some method like this?
   destroy () {
     this.gridPosX = this.gridPosY = this.currentAmmo = 

@@ -31,8 +31,7 @@ export default class UIModel{
     this.currentUIState.gridElements[y][x] = this.selectedObject.id // Awful code
   }
 
-
-  create <T extends UIObject>(UIObjectClass: {new(x:number, y:number, z:number, ...args:any): T}, args: {x: number, y:number, z:number}, setupFn?: Function){
+  create <T extends UIObject> (UIObjectClass: { new(x:number, y:number, z:number, ...args:any): T }, args: { x: number, y:number, z:number }, setupFn?: Function){
     const {x, y, z} = args
     const object = new UIObjectClass(x, y, z)
     if (setupFn) setupFn(object) // Probably a better way of doing this
@@ -46,6 +45,8 @@ export default class UIModel{
     this.objects = this.objects.sort((a, b) => {
       return a.position.z - b.position.z
     })
+
+    // Converts objects into a grid
     this.objects.forEach((uiObject) => {
       const { x, y } = uiObject.position
       // Check if at integer position, and render to state differently? (See IState interface)

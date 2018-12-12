@@ -3,6 +3,7 @@ import { IUnit, unitKind, weaponType } from "../../gameEngine/model/logicModel/u
 const tank: IUnit = {
   id: 4,
   name: 'tank',
+  cost: 5000,
   totalHealth: 100,
   type: unitKind.vehicle,
   visionRange: 3,
