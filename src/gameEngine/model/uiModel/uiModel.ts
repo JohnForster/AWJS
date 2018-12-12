@@ -47,9 +47,10 @@ export default class UIModel{
   refreshState () {
     if (this.focussedObject === this.cursor) {
       this.objects.push(this.cursor)
+      const oldHoveredUnit = this.hoveredUnit
       this.hoveredUnit = this.logicModel.findUnitAt(this.cursor.position.x, this.cursor.position.y) || undefined
-      if (this.hoveredUnit) {
-        console.log(`${this.hoveredUnit.type.name} has ${this.hoveredUnit.currentAmmo} health, ${this.hoveredUnit.currentFuel} fuel and ${this.hoveredUnit.currentAmmo} ammo remaining.`)
+      if (this.hoveredUnit && this.hoveredUnit !== oldHoveredUnit) {
+        console.log(`${this.hoveredUnit.type.name} has ${this.hoveredUnit.currentHealth} health, ${this.hoveredUnit.currentFuel} fuel and ${this.hoveredUnit.currentAmmo} ammo remaining.`)
       }
     }
     this.currentUIState.gridElements = Array.from(Array(32), x => Array(32))

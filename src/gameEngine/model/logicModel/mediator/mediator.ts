@@ -4,6 +4,7 @@ import IGameState from '../IGameState';
 import Player from '../player/player';
 import Unit from '../unit/unit';
 import tank from '../../../../resources/units/tank';
+import infantry from '../../../../resources/units/infantry';
 
 const myPlayer = new Player()
 
@@ -37,7 +38,7 @@ export default class Mediator implements LogicModel {
     units: [
       new Unit(tank, 0, 2, 2), 
       new Unit(tank, 0, 2, 3), 
-      new Unit(tank, 0, 4, 2),
+      new Unit(infantry, 0, 4, 2),
       new Unit(tank, 0, 1, 1),
     ]
   }
