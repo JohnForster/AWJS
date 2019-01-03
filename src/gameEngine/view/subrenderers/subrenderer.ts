@@ -46,6 +46,12 @@ export default class Subrenderer {
       })
     }
 
+    if (screenObjects.canvases){
+      screenObjects.canvases.forEach((canvas) => {
+        this.context.drawImage(canvas, 160, 32)
+      })
+    }
+
     // Cache this canvas for future use
     this.cachedCanvas = Subrenderer.cloneCanvas(this.canvas)
 

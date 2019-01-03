@@ -6,6 +6,8 @@ import IScreenObjects from "../IScreenObjects";
 import IGameState from "../logicModel/IGameState";
 import Unit from "../logicModel/unit/unit";
 
+import UnitBox from '../../view/subrenderers/uiRenderer/unitBox/unitBox'
+
 // This class is responsible for manipulating the UI state. Moving cursor around,
 //  selecting units, checking units etc.
 
@@ -45,12 +47,21 @@ export default class UIModel{
   }
 
   refreshState () {
+    this.gameState = this.logicModel.getState()
+    this.gameState.units.forEach((unit) => {
+      
+    })
+    
+
     if (this.focussedObject === this.cursor) {
       this.objects.push(this.cursor)
       const oldHoveredUnit = this.hoveredUnit
       this.hoveredUnit = this.logicModel.findUnitAt(this.cursor.position.x, this.cursor.position.y) || undefined
-      if (this.hoveredUnit && this.hoveredUnit !== oldHoveredUnit) {
-        console.log(`${this.hoveredUnit.type.name} has ${this.hoveredUnit.currentHealth} health, ${this.hoveredUnit.currentFuel} fuel and ${this.hoveredUnit.currentAmmo} ammo remaining.`)
+      if (this.hoveredUnit) {
+        this.currentUIState.canvases = UnitBox.makeBox(this.hoveredUnit)
+        // console.log(`${this.hoveredUnit.type.name} has ${this.hoveredUnit.currentHealth} health, ${this.hoveredUnit.currentFuel} fuel and ${this.hoveredUnit.currentAmmo} ammo remaining.`)
+      } else {
+        this.currentUIState.canvases = []
       }
     }
     this.currentUIState.gridElements = Array.from(Array(32), x => Array(32))
@@ -94,6 +105,6 @@ export default class UIModel{
   }
 
   openUnitSelectMenu(unit: Unit){
-    console.log(`${unit.type.name} has ${unit.currentFuel} fuel left`)
+
   }
 }
