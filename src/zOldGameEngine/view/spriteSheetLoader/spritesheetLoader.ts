@@ -1,4 +1,4 @@
-import { ISpriteData, ISpritesheetData } from "../spritesheets/ISpritesheetData";
+import { ISpriteData, ISpritesheetData } from '../spritesheets/ISpritesheetData';
 
 // Generalise to ImageLoader?
 export class SpritesheetLoader {

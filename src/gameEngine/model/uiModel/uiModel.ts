@@ -1,8 +1,8 @@
-import IScreenObjects from "../IScreenObjects";
-import IGameState from "../logicModel/IGameState";
-import LogicModel from "../logicModel/logicModel";
-import Cursor from "./uiObjects/cursor/cursor";
-import UIObject from "./uiObjects/uiObject";
+import IScreenObjects from '../IScreenObjects';
+import IGameState from '../logicModel/IGameState';
+import LogicModel from '../logicModel/logicModel';
+import Cursor from './uiObjects/cursor/cursor';
+import UIObject from './uiObjects/uiObject';
 
 // This class is responsible for manipulating the UI state. Moving cursor around,
 //  selecting units, checking units etc.

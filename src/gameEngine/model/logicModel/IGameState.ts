@@ -1,15 +1,15 @@
-import Player from "./player/player";
-import Unit from "./unit/unit";
+import Player from './player/player';
+import Unit from './unit/unit';
 
 export default interface IGameState {
   gameID: number,
   numberOfPlayers: number,
-  players: Array<{
+  players: {
     id: number
     player: Player, // class
     money: number,
     color: string, // enum
-  }>,
+  }[],
   terrain: {
     sizeX: number, // might be unnecessary as can be got from mapIdGrid[0].length
     sizeY: number,

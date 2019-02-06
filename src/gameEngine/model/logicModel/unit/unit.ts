@@ -1,4 +1,4 @@
-import { IUnit } from "./unitDataStructure";
+import { IUnit } from './unitDataStructure';
 
 export default class Unit {
   public id: number

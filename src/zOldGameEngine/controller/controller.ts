@@ -1,4 +1,4 @@
-import { Cursor } from "../cursor";
+import { Cursor } from '../cursor';
 
 export default class Controller {
   public cursor: Cursor

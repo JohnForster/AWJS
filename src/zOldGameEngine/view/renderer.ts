@@ -1,6 +1,6 @@
-import { BgRenderer } from "./bgRenderer/bgRenderer";
+import { BgRenderer } from './bgRenderer/bgRenderer';
 import { IMap } from './IMap'
-import { SpritesheetLoader } from "./spriteSheetLoader/spritesheetLoader";
+import { SpritesheetLoader } from './spriteSheetLoader/spritesheetLoader';
 import { UIRenderer } from './UIRenderer/uiRenderer'
 
 // pass config into renderer constructor instead of hard coding dependency?

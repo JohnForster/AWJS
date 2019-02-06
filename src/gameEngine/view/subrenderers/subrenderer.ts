@@ -6,8 +6,8 @@ export default class Subrenderer {
   public static cloneCanvas(oldCanvas: HTMLCanvasElement) {
 
     // create a new canvas
-    let newCanvas = document.createElement('canvas');
-    let context = newCanvas.getContext('2d');
+    const newCanvas = document.createElement('canvas');
+    const context = newCanvas.getContext('2d');
 
     // set dimensions
     newCanvas.width = oldCanvas.width;

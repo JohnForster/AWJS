@@ -1,4 +1,4 @@
-import UIObject from "../uiObject";
+import UIObject from '../uiObject';
 
 export default class Cursor extends UIObject {
   // have a layer (z-value) associated with uiObjects and render them in order?

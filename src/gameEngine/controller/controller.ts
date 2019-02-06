@@ -1,13 +1,13 @@
-import UIModel from "../model/uiModel/uiModel";
+import UIModel from '../model/uiModel/uiModel';
 
 export default class Controller {
   public uiModel: UIModel;
 
   public keyMappings: {[keyname: string]: string} = {
-    "w": 'up', // w
-    "s": 'down', // s
-    "a": 'left', // a
-    "d": 'right', // d
+    'w': 'up', // w
+    's': 'down', // s
+    'a': 'left', // a
+    'd': 'right', // d
     ' ': 'A', // space
   }
 

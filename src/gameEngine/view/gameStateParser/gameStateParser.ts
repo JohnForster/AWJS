@@ -1,9 +1,9 @@
-import IScreenObjects from "../../model/IScreenObjects";
-import IGameState from "../../model/logicModel/IGameState";
+import IScreenObjects from '../../model/IScreenObjects';
+import IGameState from '../../model/logicModel/IGameState';
 
 export default class GameStateParser {
   public static getTerrainScreenObjects(gameState: IGameState): IScreenObjects {
-    const terrainTiles: Array<{id: number, x: number, y: number, z: number}> = []
+    const terrainTiles: {id: number, x: number, y: number, z: number}[] = []
     gameState.terrain.mapIdGrid.forEach((row, rowNumber) => {
       row.forEach((id, colNumber) => {
         terrainTiles.push({id, x: colNumber, y: rowNumber, z: 4})

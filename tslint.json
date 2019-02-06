@@ -6,8 +6,9 @@
     "jsRules": {},
     "rules": {
         "semicolon": false,
-        "quotemark": false,
-        "object-literal-sort-keys": false
+        "quotemark": [true, "single", "avoid-escape"],
+        "object-literal-sort-keys": false,
+        "array-type": [true, "array"]
     },
     "rulesDirectory": []
 }
