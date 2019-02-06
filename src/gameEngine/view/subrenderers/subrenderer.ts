@@ -8,6 +8,8 @@ export default class Subrenderer {
   cachedCanvas: HTMLCanvasElement;
 
   constructor(spritesheetData: ISpritesheetData){
+    console.log('subrenderer created')
+    console.log(spritesheetData)
     this.canvas = this.setupCanvas()
     this.context = this.canvas.getContext('2d')
     this.cachedCanvas = document.createElement('canvas')
@@ -24,27 +26,25 @@ export default class Subrenderer {
 
     // Cycle through the state's idGrid and render each sprite to the context
     // Is this function too nested? Refactor?
-    if (screenObjects.gridElements) {
-      screenObjects.gridElements.forEach((row, rowNumber) => {
-        row.forEach((id, colNumber) => {
-          if (id !== undefined){
-            const sprite = this.sprites[id]
-            const x = colNumber * 16 + (sprite.ax || 0) // Tile width (get from where?)
-            const y = rowNumber * 16 + (sprite.ay || 0)
-            this.context.putImageData(sprite.imageData, x + 8, y + 8) // TODO WHY + 8 ??
-          }
-        })
-      })
-    }
-
-    if(screenObjects.nonGridElements){
-      screenObjects.nonGridElements.forEach((element) => {
-        const sprite = this.sprites[element.id]
-        const x = element.x * 16 + (sprite.ax || 0) // Tile width (get from where?)
-        const y = element.y * 16 + (sprite.ay || 0)
-        this.context.putImageData(sprite.imageData, x + 8, y + 8)
-      })
-    }
+    // if (screenObjects.gridElements) {
+    //   screenObjects.gridElements.forEach((row, rowNumber) => {
+    //     row.forEach((id, colNumber) => {
+    //       if (id !== undefined){
+    //         const sprite = this.sprites[id]
+    //         const x = colNumber * 16 + (sprite.ax || 0) // Tile width (get from where?)
+    //         const y = rowNumber * 16 + (sprite.ay || 0)
+    //         this.context.putImageData(sprite.imageData, x + 8, y + 8) // TODO WHY + 8 ??
+    //       }
+    //     })
+    //   })
+    // }
+    screenObjects.elements.forEach((element) => {
+      const sprite = this.sprites[element.id]
+      if(!sprite) console.log(element)
+      const x = element.x * 16 + (sprite.ax || 0) // Tile width (get from where?)
+      const y = element.y * 16 + (sprite.ay || 0)
+      this.context.putImageData(sprite.imageData, x + 8, y + 8)
+    })
 
     // Cache this canvas for future use
     this.cachedCanvas = Subrenderer.cloneCanvas(this.canvas)

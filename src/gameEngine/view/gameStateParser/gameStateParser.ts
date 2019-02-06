@@ -3,14 +3,24 @@ import IGameState from "../../model/logicModel/IGameState";
 
 export default class GameStateParser {
   static getTerrainScreenObjects (gameState: IGameState): IScreenObjects {
-    return { gridElements: gameState.terrain.mapIdGrid }
+    const terrainTiles: {id: number, x: number, y: number, z: number}[] = []
+    gameState.terrain.mapIdGrid.forEach((row, rowNumber) => {
+      row.forEach((id, colNumber) => {
+        terrainTiles.push({id, x: colNumber, y: rowNumber, z: 4})
+      })
+    })
+    return { elements: terrainTiles }
   }
 
   static getUnitsScreenObjects (gameState: IGameState): IScreenObjects {
-    const unitsAsArray: number[][] = Array(32).fill(undefined).map(x => Array(32))
-    gameState.units.forEach((unit) => {
-      unitsAsArray[unit.gridPosY][unit.gridPosX] = unit.type.id
+    const units = gameState.units.map(unit => {
+      return {
+        id: unit.type.id,
+        x: unit.gridPosX,
+        y: unit.gridPosY,
+        z: 3,
+      }
     })
-    return { gridElements: unitsAsArray }
+    return { elements: units }
   }
 }

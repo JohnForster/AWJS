@@ -10,11 +10,11 @@ import IGameState from "../logicModel/IGameState";
 // This code is bad.
 export default class UIModel{
   // TODO Where do we get the grid size from?
-  currentUIState: IScreenObjects = { gridElements: Array.from(Array(32), x => Array(32))}
+  currentUIState: IScreenObjects = {elements:[]}
   gameState: IGameState
-  selectedObject: UIObject;
-  objects: UIObject[] = [];
-  cursor: UIObject;
+  selectedObject: UIObject
+  objects: UIObject[] = []
+  cursor: UIObject
 
   constructor (logicModel:LogicModel){
     console.log(this.currentUIState)
@@ -28,7 +28,8 @@ export default class UIModel{
     this.selectedObject.sendInstruction(instruction)
     const {x, y} = this.selectedObject.position
     this.refreshState()
-    this.currentUIState.gridElements[y][x] = this.selectedObject.id // Awful code
+    // Why would we change gridElements while sending an element an instruction?
+    // this.currentUIState.gridElements[y][x] = this.selectedObject.id // Awful code
   }
 
   create <T extends UIObject> (UIObjectClass: { new(x:number, y:number, z:number, ...args:any): T }, args: { x: number, y:number, z:number }, setupFn?: Function){
@@ -40,18 +41,27 @@ export default class UIModel{
   }
 
   refreshState () {
-    this.currentUIState.gridElements = Array.from(Array(32), x => Array(32))
+    // Uses grid
+    this.currentUIState.elements = []
 
     this.objects = this.objects.sort((a, b) => {
       return a.position.z - b.position.z
     })
 
+    this.objects.forEach(({position, id}) => {
+      this.currentUIState.elements.push({id, ...position})
+    })
+    
+    return
+    /*
+    // Remove this once it is no longer relevant
     // Converts objects into a grid
     this.objects.forEach((uiObject) => {
       const { x, y } = uiObject.position
       // Check if at integer position, and render to state differently? (See IState interface)
       this.currentUIState.gridElements[y][x] = uiObject.id
     })
+    */
   }
 
   getState ():IScreenObjects {

@@ -1,4 +1,7 @@
+// ? Refactor this to be IScreenObject?
 export default interface IScreenObjects {
-  gridElements?: number[][],
-  nonGridElements?: {id:number, x: number, y: number}[]
+  elements: {id:number, x: number, y: number, z?: number}[],
+  // Remove gridElements when done
+  // gridElements?: number[][],
+  // nonGridElements?: {id:number, x: number, y: number}[]
 }
