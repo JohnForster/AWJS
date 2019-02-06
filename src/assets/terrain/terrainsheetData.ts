@@ -10,18 +10,18 @@ const terrainsheetData: ISpritesheetData = {
         x: 340,
         y: 1567,
         w: 16,
-        h: 16
+        h: 16,
       },
       1: {
         name: 'grass',
-        x: 217, 
-        y: 1567, 
-        w: 16, 
-        h: 16, 
+        x: 217,
+        y: 1567,
+        w: 16,
+        h: 16,
       },
       // etc. etc.
-    }
-  }
+    },
+  },
 }
 
 export default terrainsheetData

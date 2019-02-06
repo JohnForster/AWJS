@@ -1,13 +1,13 @@
 export default abstract class UIObject {
-  position: {
+  public position: {
     x: number,
     y: number,
     z: number,
   }
-  name:string
-  id: number
+  public name: string
+  public id: number
 
-  instructions: {[key:string]: Function} = {
+  public instructions: {[key: string]: Function} = {
     up: () => {},
     down: () => {},
     left: () => {},
@@ -20,14 +20,14 @@ export default abstract class UIObject {
     select: () => {},
   }
 
-  constructor(x:number, y:number, z:number, ...args:any) {
-    this.position = {x: x, y: y, z: z}
+  constructor(x: number, y: number, z: number, ...args: any) {
+    this.position = {x, y, z}
     this.init(args)
   }
 
-  init(args: any[]): void {};
+  public init(args: any[]): void {};
 
-  sendInstruction(instruction:string) {
+  public sendInstruction(instruction: string) {
     this.instructions[instruction]()
   }
 }

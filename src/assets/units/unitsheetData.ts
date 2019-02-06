@@ -20,11 +20,11 @@ const unitsheetData: ISpritesheetData = {
         y: 6,
         w: 13,
         h: 13,
-        ax: 2,
+        ax: 1,
         ay: 1,
       },
-    }
-  }
+    },
+  },
 }
 
 export default unitsheetData

@@ -5,24 +5,24 @@ import { ISpritesheetData } from '../spritesheets/ISpritesheetData';
 //  acts in the same manner as a terrainMap/entityMap type thing.
 // TODO build generic renderer class? Takes in a spriteSheetData object.
 export class UIRenderer {
-  cursor: Cursor
-  lastCursorPosition: {x: number, y:number}
-  spritesheetData: ISpritesheetData;
-  cursorCanvas: HTMLCanvasElement
+  public cursor: Cursor
+  public lastCursorPosition: {x: number, y: number}
+  public spritesheetData: ISpritesheetData;
+  public cursorCanvas: HTMLCanvasElement
 
   // TODO change UIRenderer to take in some form of UIMap object
-  //  that contains all UI data? Or even some generic map object 
+  //  that contains all UI data? Or even some generic map object
   //  that could be used for terrain, units AND UI?
-  constructor(cursor:Cursor, spriteSheetData:ISpritesheetData){
+  constructor(cursor: Cursor, spriteSheetData: ISpritesheetData) {
     this.spritesheetData = spriteSheetData
     this.cursor = cursor
   }
 
   // On generic renderer class, render takes in a map
-  //  ( eg. UIMap, terrainMap, entityMap) ? 
-  render(): HTMLCanvasElement {
+  //  ( eg. UIMap, terrainMap, entityMap) ?
+  public render(): HTMLCanvasElement {
     const noMovement = this.cursor.position === this.lastCursorPosition
-    if (noMovement) return this.cursorCanvas
+    if (noMovement) { return this.cursorCanvas }
     return this.draw()
   }
 

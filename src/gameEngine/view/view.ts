@@ -1,24 +1,23 @@
+import ISpritesheetData from '../../assets/ISpritesheetData';
+import IScreenObjects from '../model/IScreenObjects';
+import LogicModel from '../model/logicModel/logicModel';
+import UIModel from '../model/uiModel/uiModel';
+import GameStateParser from './gameStateParser/gameStateParser';
 import BgRenderer from './subrenderers/bgRenderer/bgRenderer'
 import UIRenderer from './subrenderers/uiRenderer/uiRenderer';
-import UIModel from '../model/uiModel/uiModel';
-import LogicModel from '../model/logicModel/logicModel';
-import ISpritesheetData from '../../assets/ISpritesheetData';
 import UnitRenderer from './subrenderers/unitRenderer.ts/unitRenderer';
-import GameStateParser from './gameStateParser/gameStateParser';
-import IScreenObjects from '../model/IScreenObjects';
 // import UnitRenderer from './subrenderers/unitRenderer.ts/unitRenderer';
 
-
 export default class View {
-  bgRenderer: BgRenderer;
-  uiRenderer: UIRenderer;
-  unitRenderer: any;
-  uiModel: UIModel;
-  logicModel: LogicModel;
-  mainCanvas: HTMLCanvasElement;
-  mainContext: CanvasRenderingContext2D;
+  public bgRenderer: BgRenderer;
+  public uiRenderer: UIRenderer;
+  public unitRenderer: any;
+  public uiModel: UIModel;
+  public logicModel: LogicModel;
+  public mainCanvas: HTMLCanvasElement;
+  public mainContext: CanvasRenderingContext2D;
 
-  constructor(logicModel: LogicModel, uiModel:UIModel, spritesheets:{[key:string]:ISpritesheetData}) {
+  constructor(logicModel: LogicModel, uiModel: UIModel, spritesheets: {[key: string]: ISpritesheetData}) {
     this.logicModel = logicModel
     this.uiModel = uiModel
 
@@ -30,7 +29,7 @@ export default class View {
     this.unitRenderer = new UnitRenderer(spritesheets.units)
   }
 
-  render () {
+  public render() {
     // Question - the variables defined here are purely for readability,
     //  would it be better to use a functional style here?
     const gameState = this.getGameState()
@@ -46,7 +45,7 @@ export default class View {
     // this.paintToMainCanvas(gameCanvas)
   }
 
-  private paintToMainCanvas(...canvases: HTMLCanvasElement[]){
+  private paintToMainCanvas(...canvases: HTMLCanvasElement[]) {
     this.mainContext.clearRect(0, 0, this.mainCanvas.width, this.mainCanvas.height)
     canvases.forEach((canvas) => {
       // TODO If you are wondering why the elements are off-line, see todo in Subrenderer.render
@@ -54,10 +53,10 @@ export default class View {
     })
   }
 
-  private renderGame(terrainScreenObjects:IScreenObjects, unitScreenObjects: IScreenObjects): HTMLCanvasElement[]{
+  private renderGame(terrainScreenObjects: IScreenObjects, unitScreenObjects: IScreenObjects): HTMLCanvasElement[] {
     return [
       this.bgRenderer.render(terrainScreenObjects),
-      this.unitRenderer.render(unitScreenObjects)
+      this.unitRenderer.render(unitScreenObjects),
     ]
   }
 
@@ -65,16 +64,16 @@ export default class View {
     return this.uiRenderer.render(uiState)
   }
 
-  private getGameState(){
+  private getGameState() {
     return this.logicModel.getState()
   }
 
-  private getUIState(){
+  private getUIState() {
     return this.uiModel.getState()
   }
 
   private setupMainCanvas(): HTMLCanvasElement {
-    const canvas = <HTMLCanvasElement>document.getElementById('canvas');
+    const canvas = document.getElementById('canvas') as HTMLCanvasElement;
     canvas.height = 600; // set dimensions in config?
     canvas.width = 800;
     return canvas;

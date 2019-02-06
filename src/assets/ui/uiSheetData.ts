@@ -13,9 +13,9 @@ const uisheetData: ISpritesheetData  = {
         h: 31,
         ax: -3,
         ay: -3,
-      }
-    }
-  }
+      },
+    },
+  },
 }
 
 export default uisheetData

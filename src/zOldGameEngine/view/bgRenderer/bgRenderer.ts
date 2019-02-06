@@ -1,29 +1,29 @@
-import { ISpritesheetData, ISpriteData } from '../spritesheets/ISpritesheetData'
 import { IMap } from '../IMap'
+import { ISpriteData, ISpritesheetData } from '../spritesheets/ISpritesheetData'
 
 export class BgRenderer {
-  map: IMap;
-  tileData: ISpriteData[];
-  mapCanvas: HTMLCanvasElement;
+  public map: IMap;
+  public tileData: ISpriteData[];
+  public mapCanvas: HTMLCanvasElement;
   // Animation frame?
 
-  constructor (tileSheetData: ISpritesheetData) {
+  constructor(tileSheetData: ISpritesheetData) {
     this.tileData = tileSheetData.data.sprites
   }
 
-  render(map?: IMap):HTMLCanvasElement {
-    if (map) this.map = map
-    if (!this.map) throw new Error ('No map to render.')
-    if (!map && this.mapCanvas) return this.mapCanvas
+  public render(map?: IMap): HTMLCanvasElement {
+    if (map) { this.map = map }
+    if (!this.map) { throw new Error ('No map to render.') }
+    if (!map && this.mapCanvas) { return this.mapCanvas }
     return this.draw(map)
   }
 
-  loadMap(map: IMap){
+  public loadMap(map: IMap) {
     this.map = map
   }
 
-  // This method could be generic between all renderers? 
-  private draw(map?: IMap):HTMLCanvasElement {
+  // This method could be generic between all renderers?
+  private draw(map?: IMap): HTMLCanvasElement {
     const tempCanvas: HTMLCanvasElement = document.createElement('canvas');
     const tempContext: CanvasRenderingContext2D = tempCanvas.getContext('2d');
     this.map.data.forEach((row, rowNumber) => {
@@ -37,4 +37,3 @@ export class BgRenderer {
     return tempCanvas
   }
 }
-

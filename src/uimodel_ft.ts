@@ -22,9 +22,9 @@
 // uiModel.state // unitSelected, unit = apc2,  movableSquares = <array of coordinates>
 // uiModel.move([1,2])
 // uiModel.state // unitMoving, initialSquare = [1,1], path = [[1,2]]
-// uiModel.move([2,2]) 
+// uiModel.move([2,2])
 // uiModel.state // unitMoving, initialSquare = [1,1], path = [[1,2], [2,2]]
-// uiModel.move([2,1]) 
+// uiModel.move([2,1])
 // uiModel.state // unitMoving, initialSquare = [1,1], path = [[1,2], [2,2], [2,1]]
 // uiModel.confirmMove([2,1], [[1,2], [2,2], [2,1]])
 // uiModel.state // unitMoving, <state>

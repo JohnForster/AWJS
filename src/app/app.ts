@@ -1,7 +1,7 @@
 import Engine from '../gameEngine/engine'
 
 export default new class App {
-  run () {
+  public run() {
     const engine = new Engine()
   }
 }

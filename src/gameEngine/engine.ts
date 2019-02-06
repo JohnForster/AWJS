@@ -1,9 +1,9 @@
-import View from './view/view'
 import Controller from './controller/controller'
-import UIModel from './model/uiModel/uiModel'
-import Mediator from './model/logicModel/mediator/mediator'
-import ImageLoader from './view/subrenderers/imageLoader/imageLoader';
 import LogicModel from './model/logicModel/logicModel';
+import Mediator from './model/logicModel/mediator/mediator'
+import UIModel from './model/uiModel/uiModel'
+import ImageLoader from './view/subrenderers/imageLoader/imageLoader';
+import View from './view/view'
 
 // Load spritesheetData by config?
 import terrainsheetData from '../assets/terrain/terrainsheetData'
@@ -11,11 +11,11 @@ import uisheetData from '../assets/ui/uiSheetData'
 import unitsheetData from '../assets/units/unitsheetData'
 
 export default class Engine {
-  view: View;
-  controller: Controller;
-  uiModel: UIModel;
-  logicModel: LogicModel;
-  constructor () {
+  public view: View;
+  public controller: Controller;
+  public uiModel: UIModel;
+  public logicModel: LogicModel;
+  constructor() {
     // this could be `new LogicModel()` in a local version, as mediator will implement the LogicModel interface
     this.logicModel = new Mediator()
     this.uiModel = new UIModel(this.logicModel)
@@ -26,17 +26,17 @@ export default class Engine {
     this.performAsyncSetup()
   }
 
-  async performAsyncSetup() {
+  public async performAsyncSetup() {
     // Call and await all initial async functions here.
     // Eg. this.view.loadSpritesheets()
     await Promise.all([
-      ImageLoader.load(terrainsheetData, uisheetData, unitsheetData)
+      ImageLoader.load(terrainsheetData, uisheetData, unitsheetData),
       // Any other async set up functions
     ])
     this.runGame()
   }
 
-  runGame(){
+  public runGame() {
     setInterval(() => {
       this.view.render()
     }, 1000 / 30)

@@ -1,20 +1,20 @@
 import { BgRenderer } from "./bgRenderer/bgRenderer";
-import { UIRenderer } from './UIRenderer/uiRenderer'
 import { IMap } from './IMap'
 import { SpritesheetLoader } from "./spriteSheetLoader/spritesheetLoader";
+import { UIRenderer } from './UIRenderer/uiRenderer'
 
 // pass config into renderer constructor instead of hard coding dependency?
+import { Cursor } from '../cursor'
 import { terrainsheetData } from './spritesheets/terrainSheetData'
 import { uisheetData } from './spritesheets/UISheetData'
-import { Cursor } from '../cursor'
 
 // Currently Unimplemented
 export class Renderer {
-  gameCanvas: HTMLCanvasElement;
-  gameContext: CanvasRenderingContext2D;
+  public gameCanvas: HTMLCanvasElement;
+  public gameContext: CanvasRenderingContext2D;
   // map: MapObject;
-  bgRenderer: BgRenderer
-  uiRenderer: UIRenderer
+  public bgRenderer: BgRenderer
+  public uiRenderer: UIRenderer
   // unitRenderer: UnitRenderer
 
   // Maybe renderer takes a map and cursor? Or a gamestate object that
@@ -29,15 +29,15 @@ export class Renderer {
     // effects renderer? etc?.,.
   }
 
-  loadMap(map:IMap){
+  public loadMap(map: IMap) {
     this.bgRenderer.loadMap(map)
   }
 
-  render () {
+  public render() {
     this.gameContext.clearRect(0, 0, this.gameCanvas.width, this.gameCanvas.height)
     // Map, gamestate and ui state required
     // Perhaps have each of these methods return a canvas which can then be drawn in the main renderer?
-    const canvases = this.getCanvases(this.bgRenderer, this.uiRenderer)//, this.unitRenderer)
+    const canvases = this.getCanvases(this.bgRenderer, this.uiRenderer)// , this.unitRenderer)
     canvases.forEach((canvas) => {
       // change 0,0 to topLeft adjustment?
       this.gameContext.drawImage(canvas, 0, 0)
@@ -45,13 +45,13 @@ export class Renderer {
   }
 
   private setupMainCanvas(): HTMLCanvasElement {
-    const canvas = <HTMLCanvasElement>document.getElementById('canvas');
+    const canvas = document.getElementById('canvas') as HTMLCanvasElement;
     canvas.height = 600; // set dimensions in config?
     canvas.width = 800;
     return canvas;
   }
 
-  private getCanvases(bgRenderer:BgRenderer, uiRenderer:UIRenderer): HTMLCanvasElement[] {
+  private getCanvases(bgRenderer: BgRenderer, uiRenderer: UIRenderer): HTMLCanvasElement[] {
     // Return array ordered from background to foreground
     return [
       this.bgRenderer.render(), // Keep map static instead of reading it every time?

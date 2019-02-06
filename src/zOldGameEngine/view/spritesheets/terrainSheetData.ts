@@ -6,12 +6,12 @@ const terrainsheetData: ISpritesheetData = {
     type: 'terrain',
     sprites: [
       {
-        id: 0, 
+        id: 0,
         name: 'grass',
-        x: 217, 
-        y: 1567, 
-        w: 16, 
-        h: 16, 
+        x: 217,
+        y: 1567,
+        w: 16,
+        h: 16,
       },
       {
         id: 1,
@@ -19,11 +19,11 @@ const terrainsheetData: ISpritesheetData = {
         x: 340,
         y: 1567,
         w: 16,
-        h: 16
-      }
+        h: 16,
+      },
       // etc. etc.
-    ]
-  }
+    ],
+  },
 }
 
 export default terrainsheetData

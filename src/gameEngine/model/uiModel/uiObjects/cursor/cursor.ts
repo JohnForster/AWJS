@@ -2,9 +2,9 @@ import UIObject from "../uiObject";
 
 export default class Cursor extends UIObject {
   // have a layer (z-value) associated with uiObjects and render them in order?
-  name: string = 'cursor'
-  id: number = 0
-  instructions: {[key:string]: Function} = {
+  public name: string = 'cursor'
+  public id: number = 0
+  public instructions: {[key: string]: Function} = {
     up: () => { this.moveUp() },
     down: () => { this.moveDown() },
     left: () => { this.moveLeft() },
@@ -17,16 +17,16 @@ export default class Cursor extends UIObject {
     select: () => {},
   }
 
-  moveUp(n:number = 1){
-    if (this.position.y > 0) this.position.y -= n
+  public moveUp(n: number = 1) {
+    if (this.position.y > 0) { this.position.y -= n }
   }
-  moveDown(n:number = 1){
+  public moveDown(n: number = 1) {
     this.position.y += n
   }
-  moveLeft(n:number = 1){
-    if (this.position.x > 0) this.position.x -= n
+  public moveLeft(n: number = 1) {
+    if (this.position.x > 0) { this.position.x -= n }
   }
-  moveRight(n:number = 1){
+  public moveRight(n: number = 1) {
     this.position.x += n
   }
 }

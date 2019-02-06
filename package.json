@@ -2,18 +2,20 @@
   "scripts": {
     "build": "yarn webpack",
     "host": "yarn webpack-dev-server --mode=development",
-    "start": "yarn webpack-dev-server --mode=development"
+    "start": "yarn webpack-dev-server --mode=development",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^1.0.0",
+    "copy-webpack-plugin": "^4.6.0",
     "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.11.1",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^5.3.1",
+    "tslint": "^5.12.1",
     "typescript": "^3.2.1",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10",
-    "clean-webpack-plugin": "^1.0.0",
-    "copy-webpack-plugin": "^4.6.0"
+    "webpack-dev-server": "^3.1.10"
   }
 }

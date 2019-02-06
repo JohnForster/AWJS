@@ -1,19 +1,19 @@
-import LogicModel from '../logicModel'
 import IGameState from '../IGameState';
+import LogicModel from '../logicModel'
 
+import tank from '../../../../resources/units/tank';
 import Player from '../player/player';
 import Unit from '../unit/unit';
-import tank from '../../../../resources/units/tank';
 
 const myPlayer = new Player()
 
 export default class Mediator implements LogicModel {
-  logicModel: LogicModel;
-  constructor(){
+  public logicModel: LogicModel;
+  constructor() {
     this.logicModel = new LogicModel
 
   }
-  getState(): IGameState {
+  public getState(): IGameState {
     return {
       gameID: 1,
       numberOfPlayers: 1,
@@ -27,19 +27,19 @@ export default class Mediator implements LogicModel {
         sizeX: 5, // might be unnecessary as can be got from mapIdGrid[0].length
         sizeY: 5,
         mapIdGrid: [
-          [0,0,1,0,0],
-          [0,1,1,1,0],
-          [1,1,1,1,1],
-          [0,1,1,1,0],
-          [0,0,1,0,0],
+          [0, 0, 1, 0, 0],
+          [0, 1, 1, 1, 0],
+          [1, 1, 1, 1, 1],
+          [0, 1, 1, 1, 0],
+          [0, 0, 1, 0, 0],
         ],
       },
       units: [
-        new Unit(tank, 0, 2, 2), 
-        new Unit(tank, 0, 2, 3), 
+        new Unit(tank, 0, 2, 2),
+        new Unit(tank, 0, 2, 3),
         new Unit(tank, 0, 4, 2),
         new Unit(tank, 0, 1, 1),
-      ]
+      ],
     }
   }
 }

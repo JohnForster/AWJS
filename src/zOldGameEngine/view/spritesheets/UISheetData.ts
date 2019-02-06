@@ -12,7 +12,7 @@ export const uisheetData: ISpritesheetData  = {
         y: 6,
         w: 28,
         h: 31,
-      }
-    ]
-  }
+      },
+    ],
+  },
 }
