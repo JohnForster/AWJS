@@ -1,7 +1,7 @@
-import UIModel from "../model/uiModel/uiModel";
+import InGameUIModel from "../model/uiModel/uiModel";
 
 export default class Controller {
-  uiModel: UIModel;
+  uiModel: InGameUIModel;
 
   keyMappings: {[keyname: string]: string} = {
     w: 'up', // w
@@ -9,9 +9,10 @@ export default class Controller {
     a: 'left', // a
     d: 'right', // d
     ' ': 'A', // space
+    x: 'B'
   }
 
-  constructor(uiModel: UIModel){
+  constructor(uiModel: InGameUIModel){
     this.uiModel = uiModel
     document.onkeypress = this.handleKeyPress.bind(this)
     document.onkeyup = this.handleKeyUp.bind(this)

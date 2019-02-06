@@ -1,7 +1,7 @@
-import UIModel from "../uiModel";
+import InGameUIModel from "../uiModel";
 
-export default abstract class UIObject {
-  uiModel: UIModel
+export default abstract class InGameUIObject {
+  uiModel: InGameUIModel
   position: {
     x: number,
     y: number,
@@ -24,8 +24,8 @@ export default abstract class UIObject {
   }
 
 
-  constructor(uiModel: UIModel, x:number, y:number, z:number, ...args:any) {
-    this.uiModel = uiModel
+  constructor(inGameUIModel: InGameUIModel, x:number, y:number, z:number, ...args:any) {
+    this.uiModel = inGameUIModel
     this.position = { x, y, z }
     this.init(args)
   }

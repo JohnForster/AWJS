@@ -1,6 +1,6 @@
 import BgRenderer from './subrenderers/bgRenderer/bgRenderer'
 import UIRenderer from './subrenderers/uiRenderer/uiRenderer';
-import UIModel from '../model/uiModel/uiModel';
+import InGameUIModel from '../model/uiModel/uiModel';
 import LogicModel from '../model/logicModel/logicModel';
 import ISpritesheetData from '../../assets/ISpritesheetData';
 import UnitRenderer from './subrenderers/unitRenderer.ts/unitRenderer';
@@ -13,14 +13,14 @@ export default class View {
   bgRenderer: BgRenderer;
   uiRenderer: UIRenderer;
   unitRenderer: any;
-  uiModel: UIModel;
+  uiModel: InGameUIModel;
   logicModel: LogicModel;
   mainCanvas: HTMLCanvasElement;
   mainContext: CanvasRenderingContext2D;
 
-  constructor(logicModel: LogicModel, uiModel:UIModel, spritesheets:{[key:string]:ISpritesheetData}) {
+  constructor(logicModel: LogicModel, inGameUIModel:InGameUIModel, spritesheets:{[key:string]:ISpritesheetData}) {
     this.logicModel = logicModel
-    this.uiModel = uiModel
+    this.uiModel = inGameUIModel
 
     this.mainCanvas = this.setupMainCanvas()
     this.mainContext = this.mainCanvas.getContext('2d')

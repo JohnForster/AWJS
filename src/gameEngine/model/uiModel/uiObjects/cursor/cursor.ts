@@ -1,6 +1,6 @@
-import UIObject from "../uiObject";
+import InGameUIObject from "../uiObject";
 
-export default class Cursor extends UIObject {
+export default class Cursor extends InGameUIObject {
   // have a layer (z-value) associated with uiObjects and render them in order?
   name: string = 'cursor'
   id: number = 0
@@ -10,7 +10,7 @@ export default class Cursor extends UIObject {
     left: () => { this.moveLeft() },
     right: () => { this.moveRight() },
     A: () => { this.uiModel.select(this.uiModel.hoveredUnit) },
-    B: () => {},
+    B: () => { this.uiModel.altSelect(this.uiModel.hoveredUnit)  },
     L: () => {},
     R: () => {},
     start: () => {},

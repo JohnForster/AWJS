@@ -1,5 +1,5 @@
 import LogicModel from "../logicModel/logicModel";
-import UIObject from "./uiObjects/uiObject";
+import InGameUIObject from "./uiObjects/uiObject";
 import Cursor from "./uiObjects/cursor/cursor";
 import RangeIndicator from "./uiObjects/rangeIndicator/rangeIndicator";
 import IScreenObjects from "../IScreenObjects";
@@ -12,13 +12,14 @@ import UnitBox from '../../view/subrenderers/uiRenderer/unitBox/unitBox'
 //  selecting units, checking units etc.
 
 // This code is bad.
-export default class UIModel{
+export default class InGameUIModel {
   // TODO Where do we get the grid size from?
   currentUIState: IScreenObjects = { gridElements: Array.from(Array(32), x => Array(32))}
   gameState: IGameState
-  focussedObject: UIObject;
-  objects: UIObject[] = [];
-  cursor: UIObject;
+  focussedObject: InGameUIObject;
+  selectedUnit: Unit;
+  objects: InGameUIObject[] = [];
+  cursor: InGameUIObject;
   logicModel: LogicModel;
   hoveredUnit: import("/Users/johnforster/Repos/awjs/src/gameEngine/model/logicModel/unit/unit").default;
 
@@ -38,7 +39,7 @@ export default class UIModel{
     // this.currentUIState.gridElements[y][x] = this.selectedObject.id // Awful code
   }
 
-  create <T extends UIObject> (UIObjectClass: { new(uiModel: UIModel, x:number, y:number, z:number, ...args:any): T }, pos: { x: number, y:number, z:number }, setupFn?: Function){
+  create <T extends InGameUIObject> (UIObjectClass: { new(uiModel: InGameUIModel, x:number, y:number, z:number, ...args:any): T }, pos: { x: number, y:number, z:number }, setupFn?: Function){
     const {x, y, z} = pos
     const object = new UIObjectClass(this, x, y, z)
     if (setupFn) setupFn(object) // Probably a better way of doing this
@@ -83,14 +84,18 @@ export default class UIModel{
     return this.currentUIState
   }
 
-  focus <T extends UIObject>(uiObject?: T) {
+  focus <T extends InGameUIObject>(uiObject?: T) {
     this.focussedObject = uiObject ? uiObject : this.cursor
   }
 
-  select(objectToSelect: any){
+  altSelect(objectToSelect: any){
     if (objectToSelect instanceof Unit) this.showMovementRange(objectToSelect)
   }
 
+  select(objectToSelect: any){
+    if (objectToSelect instanceof Unit) this.selectedUnit = objectToSelect
+  }
+  
   showMovementRange(unit: Unit){
     // This will need to be replaced with the path-finding algorithm when it's written
     const range = unit.type.movementRange
