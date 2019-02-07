@@ -1,5 +1,5 @@
 import { Cursor } from '../../cursor'
-import { ISpritesheetData } from '../spritesheets/ISpritesheetData';
+import { ISpritesheetData } from '../spritesheets/ISpritesheetData'
 
 // This class is a mess. I think we could fix this by having a UIMap object that
 //  acts in the same manner as a terrainMap/entityMap type thing.
@@ -7,7 +7,7 @@ import { ISpritesheetData } from '../spritesheets/ISpritesheetData';
 export class UIRenderer {
   public cursor: Cursor
   public lastCursorPosition: {x: number, y: number}
-  public spritesheetData: ISpritesheetData;
+  public spritesheetData: ISpritesheetData
   public cursorCanvas: HTMLCanvasElement
 
   // TODO change UIRenderer to take in some form of UIMap object

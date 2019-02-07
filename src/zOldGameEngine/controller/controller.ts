@@ -1,4 +1,4 @@
-import { Cursor } from '../cursor';
+import { Cursor } from '../cursor'
 
 export default class Controller {
   public cursor: Cursor
@@ -18,9 +18,9 @@ export default class Controller {
   // GameObject could be an interface that uses a move method?
   constructor(cursor: Cursor) {
     this.pressedKeys = {}
-    this.cursor = cursor;
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    document.onkeydown = document.onkeyup = this.handleKeyPress;
+    this.cursor = cursor
+    this.handleKeyPress = this.handleKeyPress.bind(this)
+    document.onkeydown = document.onkeyup = this.handleKeyPress
   }
 
   // TODO extract keybindings to config file
@@ -31,7 +31,7 @@ export default class Controller {
     this.pressedKeys[e.keyCode] = (e.type === 'keydown')
     for (const keyCode in this.pressedKeys) {
       // Skip this loop if the key is from prototype
-      if (!this.pressedKeys.hasOwnProperty(keyCode)) { continue; }
+      if (!this.pressedKeys.hasOwnProperty(keyCode)) { continue }
       console.log(this.pressedKeys)
 
       if (this.pressedKeys[keyCode] && this.keyMappings[keyCode]) {

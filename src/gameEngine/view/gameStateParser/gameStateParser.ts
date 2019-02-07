@@ -1,5 +1,5 @@
-import IScreenObjects from '../../model/IScreenObjects';
-import IGameState from '../../model/logicModel/IGameState';
+import IScreenObjects from '../../model/IScreenObjects'
+import IGameState from '../../model/logicModel/IGameState'
 
 export default class GameStateParser {
   public static getTerrainScreenObjects(gameState: IGameState): IScreenObjects {

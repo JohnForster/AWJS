@@ -4,8 +4,8 @@ interface IPosition {
 }
 
 export class Cursor {
-  public position: IPosition;
-  public imageData: ImageData;
+  public position: IPosition
+  public imageData: ImageData
 
   constructor() {
     // Store image data in cursor class or only position data?

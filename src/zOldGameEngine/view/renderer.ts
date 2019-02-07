@@ -1,6 +1,6 @@
-import { BgRenderer } from './bgRenderer/bgRenderer';
+import { BgRenderer } from './bgRenderer/bgRenderer'
 import { IMap } from './IMap'
-import { SpritesheetLoader } from './spriteSheetLoader/spritesheetLoader';
+import { SpritesheetLoader } from './spriteSheetLoader/spritesheetLoader'
 import { UIRenderer } from './UIRenderer/uiRenderer'
 
 // pass config into renderer constructor instead of hard coding dependency?
@@ -10,8 +10,8 @@ import { uisheetData } from './spritesheets/UISheetData'
 
 // Currently Unimplemented
 export class Renderer {
-  public gameCanvas: HTMLCanvasElement;
-  public gameContext: CanvasRenderingContext2D;
+  public gameCanvas: HTMLCanvasElement
+  public gameContext: CanvasRenderingContext2D
   // map: MapObject;
   public bgRenderer: BgRenderer
   public uiRenderer: UIRenderer
@@ -20,7 +20,7 @@ export class Renderer {
   // Maybe renderer takes a map and cursor? Or a gamestate object that
   //  contains map, game and UI data?
   constructor(cursor: Cursor) {
-    this.gameCanvas = this.setupMainCanvas();
+    this.gameCanvas = this.setupMainCanvas()
     this.gameContext = this.gameCanvas.getContext('2d')
     SpritesheetLoader.load(terrainsheetData, uisheetData)
     this.bgRenderer = new BgRenderer(terrainsheetData)
@@ -45,10 +45,10 @@ export class Renderer {
   }
 
   private setupMainCanvas(): HTMLCanvasElement {
-    const canvas = document.getElementById('canvas') as HTMLCanvasElement;
-    canvas.height = 600; // set dimensions in config?
-    canvas.width = 800;
-    return canvas;
+    const canvas = document.getElementById('canvas') as HTMLCanvasElement
+    canvas.height = 600 // set dimensions in config?
+    canvas.width = 800
+    return canvas
   }
 
   private getCanvases(bgRenderer: BgRenderer, uiRenderer: UIRenderer): HTMLCanvasElement[] {

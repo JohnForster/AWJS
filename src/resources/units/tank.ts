@@ -1,4 +1,4 @@
-import { IUnit, unitKind, weaponType } from '../../gameEngine/model/logicModel/unit/unitDataStructure';
+import { IUnit, unitKind, weaponType } from '../../gameEngine/model/logicModel/unit/unitDataStructure'
 
 const tank: IUnit = {
   id: 4,

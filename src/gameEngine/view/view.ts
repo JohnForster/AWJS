@@ -1,21 +1,21 @@
-import ISpritesheetData from '../../assets/ISpritesheetData';
-import IScreenObjects from '../model/IScreenObjects';
-import LogicModel from '../model/logicModel/logicModel';
-import UIModel from '../model/uiModel/uiModel';
-import GameStateParser from './gameStateParser/gameStateParser';
+import ISpritesheetData from '../../assets/ISpritesheetData'
+import IScreenObjects from '../model/IScreenObjects'
+import LogicModel from '../model/logicModel/logicModel'
+import UIModel from '../model/uiModel/uiModel'
+import GameStateParser from './gameStateParser/gameStateParser'
 import BgRenderer from './subrenderers/bgRenderer/bgRenderer'
-import UIRenderer from './subrenderers/uiRenderer/uiRenderer';
-import UnitRenderer from './subrenderers/unitRenderer.ts/unitRenderer';
+import UIRenderer from './subrenderers/uiRenderer/uiRenderer'
+import UnitRenderer from './subrenderers/unitRenderer.ts/unitRenderer'
 // import UnitRenderer from './subrenderers/unitRenderer.ts/unitRenderer';
 
 export default class View {
-  public bgRenderer: BgRenderer;
-  public uiRenderer: UIRenderer;
-  public unitRenderer: any;
-  public uiModel: UIModel;
-  public logicModel: LogicModel;
-  public mainCanvas: HTMLCanvasElement;
-  public mainContext: CanvasRenderingContext2D;
+  public bgRenderer: BgRenderer
+  public uiRenderer: UIRenderer
+  public unitRenderer: any
+  public uiModel: UIModel
+  public logicModel: LogicModel
+  public mainCanvas: HTMLCanvasElement
+  public mainContext: CanvasRenderingContext2D
 
   constructor(logicModel: LogicModel, uiModel: UIModel, spritesheets: {[key: string]: ISpritesheetData}) {
     this.logicModel = logicModel
@@ -73,9 +73,9 @@ export default class View {
   }
 
   private setupMainCanvas(): HTMLCanvasElement {
-    const canvas = document.getElementById('canvas') as HTMLCanvasElement;
-    canvas.height = 600; // set dimensions in config?
-    canvas.width = 800;
-    return canvas;
+    const canvas = document.getElementById('canvas') as HTMLCanvasElement
+    canvas.height = 600 // set dimensions in config?
+    canvas.width = 800
+    return canvas
   }
 }

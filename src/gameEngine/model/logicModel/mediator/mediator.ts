@@ -1,14 +1,14 @@
-import IGameState from '../IGameState';
+import IGameState from '../IGameState'
 import LogicModel from '../logicModel'
 
-import tank from '../../../../resources/units/tank';
-import Player from '../player/player';
-import Unit from '../unit/unit';
+import tank from '../../../../resources/units/tank'
+import Player from '../player/player'
+import Unit from '../unit/unit'
 
 const myPlayer = new Player()
 
 export default class Mediator implements LogicModel {
-  public logicModel: LogicModel;
+  public logicModel: LogicModel
   constructor() {
     this.logicModel = new LogicModel ()
 

@@ -1,8 +1,8 @@
 import Controller from './controller/controller'
-import LogicModel from './model/logicModel/logicModel';
+import LogicModel from './model/logicModel/logicModel'
 import Mediator from './model/logicModel/mediator/mediator'
 import UIModel from './model/uiModel/uiModel'
-import ImageLoader from './view/subrenderers/imageLoader/imageLoader';
+import ImageLoader from './view/subrenderers/imageLoader/imageLoader'
 import View from './view/view'
 
 // ? Load spritesheetData by config?
@@ -11,10 +11,10 @@ import uisheetData from '../assets/ui/uiSheetData'
 import unitsheetData from '../assets/units/unitsheetData'
 
 export default class Engine {
-  public view: View;
-  public controller: Controller;
-  public uiModel: UIModel;
-  public logicModel: LogicModel;
+  public view: View
+  public controller: Controller
+  public uiModel: UIModel
+  public logicModel: LogicModel
   constructor() {
     // this could be `new LogicModel()` in a local version, as mediator will implement the LogicModel interface
     this.logicModel = new Mediator()

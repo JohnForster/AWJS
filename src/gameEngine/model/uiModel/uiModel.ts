@@ -1,8 +1,8 @@
-import IScreenObjects from '../IScreenObjects';
-import IGameState from '../logicModel/IGameState';
-import LogicModel from '../logicModel/logicModel';
-import Cursor from './uiObjects/cursor/cursor';
-import UIObject from './uiObjects/uiObject';
+import IScreenObjects from '../IScreenObjects'
+import IGameState from '../logicModel/IGameState'
+import LogicModel from '../logicModel/logicModel'
+import Cursor from './uiObjects/cursor/cursor'
+import UIObject from './uiObjects/uiObject'
 
 // This class is responsible for manipulating the UI state. Moving cursor around,
 //  selecting units, checking units etc.
@@ -35,7 +35,7 @@ export default class UIModel {
     UIObjectClass: new(x: number, y: number, z: number, ...args: any) => T,
     args: { x: number, y: number, z: number },
     setupFn?: (object: T) => void,
-  ) {
+  ): T {
     const {x, y, z} = args
     const object = new UIObjectClass(x, y, z)
     if (setupFn) { setupFn(object) } // Probably a better way of doing this

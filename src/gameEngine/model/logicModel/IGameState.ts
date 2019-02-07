@@ -1,5 +1,5 @@
-import Player from './player/player';
-import Unit from './unit/unit';
+import Player from './player/player'
+import Unit from './unit/unit'
 
 export default interface IGameState {
   gameID: number,

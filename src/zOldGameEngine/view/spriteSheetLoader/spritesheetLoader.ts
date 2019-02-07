@@ -1,4 +1,4 @@
-import { ISpriteData, ISpritesheetData } from '../spritesheets/ISpritesheetData';
+import { ISpriteData, ISpritesheetData } from '../spritesheets/ISpritesheetData'
 
 // Generalise to ImageLoader?
 export class SpritesheetLoader {
@@ -15,25 +15,25 @@ export class SpritesheetLoader {
 
   public static getContext(image: HTMLImageElement) {
     const canvas = SpritesheetLoader.setupCanvas(image)
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext('2d')
     context.drawImage(image, 0, 0)
     return context
   }
 
   public static setupCanvas(image: HTMLImageElement) {
     const canvas: HTMLCanvasElement = document.createElement('canvas')
-    canvas.width = image.width;
-    canvas.height = image.height;
+    canvas.width = image.width
+    canvas.height = image.height
     return canvas
   }
 
   public static addImageProcess(src: string) {
     return new Promise((resolve, reject) => {
-      const img: HTMLImageElement = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = (err) => reject(err);
-      img.src = src;
-    });
+      const img: HTMLImageElement = new Image()
+      img.onload = () => resolve(img)
+      img.onerror = (err) => reject(err)
+      img.src = src
+    })
   }
 
   public static getImageData(sprite: ISpriteData, context: CanvasRenderingContext2D): ImageData {

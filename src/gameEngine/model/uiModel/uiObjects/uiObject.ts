@@ -25,7 +25,7 @@ export default abstract class UIObject {
     this.init(args)
   }
 
-  public init(args: any[]): void {};
+  public init(args: any[]): void {}
 
   public sendInstruction(instruction: string) {
     this.instructions[instruction]()

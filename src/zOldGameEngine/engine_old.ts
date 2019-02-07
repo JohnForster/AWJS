@@ -4,11 +4,11 @@ export default class Engine {
 
   public static addImageProcess(src: string) {
     return new Promise((resolve, reject) => {
-      const img: HTMLImageElement = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = () => reject();
-      img.src = src;
-    });
+      const img: HTMLImageElement = new Image()
+      img.onload = () => resolve(img)
+      img.onerror = () => reject()
+      img.src = src
+    })
   }
 
   public static getImageData(
@@ -18,18 +18,18 @@ export default class Engine {
     width: number,
     height: number,
   ): ImageData {
-    const tempCanvas = document.createElement('canvas');
-    const tempContext = tempCanvas.getContext('2d');
-    tempCanvas.width = image.width;
-    tempCanvas.height = image.height;
+    const tempCanvas = document.createElement('canvas')
+    const tempContext = tempCanvas.getContext('2d')
+    tempCanvas.width = image.width
+    tempCanvas.height = image.height
     tempContext.drawImage(image, 0, 0)
     return tempContext.getImageData(topLeftX, topLeftY, width, height)
   }
-  public canvas: HTMLCanvasElement;
-  public context: CanvasRenderingContext2D;
-  public ticksPerSecond: number = 0.5; // set ticksPerSecond in config?
-  public sprites: ImageData[] = [];
-  public cursor: Cursor;
+  public canvas: HTMLCanvasElement
+  public context: CanvasRenderingContext2D
+  public ticksPerSecond: number = 0.5 // set ticksPerSecond in config?
+  public sprites: ImageData[] = []
+  public cursor: Cursor
   public cursorTile = { x: 1, y: 1 }
 
   // Temporarily hard coded
@@ -44,7 +44,7 @@ export default class Engine {
 
   constructor() {
     // Inject cursor dependency?
-    this.canvas = this.setupCanvas();
+    this.canvas = this.setupCanvas()
     this.context = this.canvas.getContext('2d')
     this.cursor = new Cursor ()
   }
@@ -65,10 +65,10 @@ export default class Engine {
   }
 
   private setupCanvas(): HTMLCanvasElement {
-    const canvas = document.getElementById('canvas') as HTMLCanvasElement;
-    canvas.height = 600; // set dimensions in config?
-    canvas.width = 800;
-    return canvas;
+    const canvas = document.getElementById('canvas') as HTMLCanvasElement
+    canvas.height = 600 // set dimensions in config?
+    canvas.width = 800
+    return canvas
   }
 
   private async gameTick() {
@@ -84,8 +84,8 @@ export default class Engine {
   }
 
   private printMap(map: number[][]) {
-    const tempCanvas: HTMLCanvasElement = document.createElement('canvas');
-    const tempContext: CanvasRenderingContext2D = tempCanvas.getContext('2d');
+    const tempCanvas: HTMLCanvasElement = document.createElement('canvas')
+    const tempContext: CanvasRenderingContext2D = tempCanvas.getContext('2d')
     const tileSize = { x: 16, y: 16}
     map.forEach((row, rowNumber) => {
       row.forEach((id, colNumber) => {
@@ -95,20 +95,20 @@ export default class Engine {
       })
     })
     const mapSize = this.getMapSize(map, tileSize)
-    const top = { x: Math.ceil((this.canvas.width - mapSize.x) / 2), y: 20 };
+    const top = { x: Math.ceil((this.canvas.width - mapSize.x) / 2), y: 20 }
     this.context.drawImage(tempCanvas, top.x, top.y)
   }
 
   private getMapSize(map: number[][], tileSize: { x: number; y: number; }) {
-    return { x: (map.length * tileSize.x), y: (map[0].length * tileSize.y) };
+    return { x: (map.length * tileSize.x), y: (map[0].length * tileSize.y) }
   }
 
   private printCursor(cursorTile: any, id: number) {
-    const tempCanvas: HTMLCanvasElement = document.createElement('canvas');
-    const tempContext: CanvasRenderingContext2D = tempCanvas.getContext('2d');
-    tempContext.putImageData(this.sprites[id], 0, 0);
+    const tempCanvas: HTMLCanvasElement = document.createElement('canvas')
+    const tempContext: CanvasRenderingContext2D = tempCanvas.getContext('2d')
+    tempContext.putImageData(this.sprites[id], 0, 0)
     const mapSize = this.getMapSize(this.map, {x: 16, y: 16})
-    const top = { x: Math.ceil((this.canvas.width - mapSize.x) / 2), y: 20 };
+    const top = { x: Math.ceil((this.canvas.width - mapSize.x) / 2), y: 20 }
     const x = cursorTile.x * 16 + top.x - 3 // Cursor square is 6 pixels wider/taller than a tile, 3 on each side
     const y = cursorTile.y * 16 + top.y - 3
     this.context.drawImage(tempCanvas, x, y)

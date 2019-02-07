@@ -1,5 +1,5 @@
-import Controller from './controller/controller';
-import { Cursor } from './cursor';
+import Controller from './controller/controller'
+import { Cursor } from './cursor'
 import { IMap } from './view/IMap'
 import { Renderer } from './view/renderer'
 
@@ -16,9 +16,9 @@ const map: IMap = {
 }
 
 export default class Engine {
-  public renderer: Renderer;
-  public controller: Controller;
-  public cursor: Cursor;
+  public renderer: Renderer
+  public controller: Controller
+  public cursor: Cursor
 
   constructor() {
     this.cursor = new Cursor ()

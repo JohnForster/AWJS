@@ -2,9 +2,9 @@ import { IMap } from '../IMap'
 import { ISpriteData, ISpritesheetData } from '../spritesheets/ISpritesheetData'
 
 export class BgRenderer {
-  public map: IMap;
-  public tileData: ISpriteData[];
-  public mapCanvas: HTMLCanvasElement;
+  public map: IMap
+  public tileData: ISpriteData[]
+  public mapCanvas: HTMLCanvasElement
   // Animation frame?
 
   constructor(tileSheetData: ISpritesheetData) {
@@ -24,8 +24,8 @@ export class BgRenderer {
 
   // This method could be generic between all renderers?
   private draw(map?: IMap): HTMLCanvasElement {
-    const tempCanvas: HTMLCanvasElement = document.createElement('canvas');
-    const tempContext: CanvasRenderingContext2D = tempCanvas.getContext('2d');
+    const tempCanvas: HTMLCanvasElement = document.createElement('canvas')
+    const tempContext: CanvasRenderingContext2D = tempCanvas.getContext('2d')
     this.map.data.forEach((row, rowNumber) => {
       row.forEach((id, colNumber) => {
         const x = colNumber * this.tileData[id].w

@@ -1,28 +1,28 @@
 import ISpritesheetData from 'src/assets/ISpritesheetData'
-import IScreenObjects from '../../model/IScreenObjects';
+import IScreenObjects from '../../model/IScreenObjects'
 
 export default class Subrenderer {
 
   public static cloneCanvas(oldCanvas: HTMLCanvasElement) {
 
     // create a new canvas
-    const newCanvas = document.createElement('canvas');
-    const context = newCanvas.getContext('2d');
+    const newCanvas = document.createElement('canvas')
+    const context = newCanvas.getContext('2d')
 
     // set dimensions
-    newCanvas.width = oldCanvas.width;
-    newCanvas.height = oldCanvas.height;
+    newCanvas.width = oldCanvas.width
+    newCanvas.height = oldCanvas.height
 
     // apply the old canvas to the new one
-    context.drawImage(oldCanvas, 0, 0);
+    context.drawImage(oldCanvas, 0, 0)
 
     // return the new canvas
-    return newCanvas;
+    return newCanvas
   }
-  public sprites: ISpritesheetData['data']['sprites'];
-  public canvas: HTMLCanvasElement;
-  public context: CanvasRenderingContext2D;
-  public cachedCanvas: HTMLCanvasElement;
+  public sprites: ISpritesheetData['data']['sprites']
+  public canvas: HTMLCanvasElement
+  public context: CanvasRenderingContext2D
+  public cachedCanvas: HTMLCanvasElement
 
   constructor(spritesheetData: ISpritesheetData) {
     this.canvas = this.setupCanvas()
@@ -67,9 +67,9 @@ export default class Subrenderer {
   }
 
   private setupCanvas(): HTMLCanvasElement {
-    const canvas = document.createElement('canvas');
-    canvas.height = 600; // set dimensions in config?
-    canvas.width = 800;
-    return canvas;
+    const canvas = document.createElement('canvas')
+    canvas.height = 600 // set dimensions in config?
+    canvas.width = 800
+    return canvas
   }
 }
