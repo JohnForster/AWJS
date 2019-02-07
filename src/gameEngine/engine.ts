@@ -5,7 +5,7 @@ import UIModel from './model/uiModel/uiModel'
 import ImageLoader from './view/subrenderers/imageLoader/imageLoader';
 import View from './view/view'
 
-// Load spritesheetData by config?
+// ? Load spritesheetData by config?
 import terrainsheetData from '../assets/terrain/terrainsheetData'
 import uisheetData from '../assets/ui/uiSheetData'
 import unitsheetData from '../assets/units/unitsheetData'
@@ -20,7 +20,11 @@ export default class Engine {
     this.logicModel = new Mediator()
     this.uiModel = new UIModel(this.logicModel)
 
-    this.view = new View(this.logicModel, this.uiModel, {terrain: terrainsheetData, ui: uisheetData, units: unitsheetData}) // get spritesheet data from a config file?
+    this.view = new View(
+      this.logicModel,
+      this.uiModel,
+      { terrain: terrainsheetData, ui: uisheetData, units: unitsheetData },
+    )
     this.controller = new Controller(this.uiModel) // And this.view if using mouse input?
 
     this.performAsyncSetup()

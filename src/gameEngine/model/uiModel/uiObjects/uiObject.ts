@@ -7,7 +7,7 @@ export default abstract class UIObject {
   public name: string
   public id: number
 
-  public instructions: {[key: string]: Function} = {
+  public instructions: { [key: string]: () => void } = {
     up: () => {},
     down: () => {},
     left: () => {},

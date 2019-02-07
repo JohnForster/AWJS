@@ -10,7 +10,7 @@ const myPlayer = new Player()
 export default class Mediator implements LogicModel {
   public logicModel: LogicModel;
   constructor() {
-    this.logicModel = new LogicModel
+    this.logicModel = new LogicModel ()
 
   }
   public getState(): IGameState {

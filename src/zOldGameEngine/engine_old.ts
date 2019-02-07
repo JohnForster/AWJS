@@ -11,7 +11,13 @@ export default class Engine {
     });
   }
 
-  public static getImageData(image: HTMLImageElement, topLeftX: number, topLeftY: number, width: number, height: number): ImageData {
+  public static getImageData(
+    image: HTMLImageElement,
+    topLeftX: number,
+    topLeftY: number,
+    width: number,
+    height: number,
+  ): ImageData {
     const tempCanvas = document.createElement('canvas');
     const tempContext = tempCanvas.getContext('2d');
     tempCanvas.width = image.width;
@@ -40,7 +46,7 @@ export default class Engine {
     // Inject cursor dependency?
     this.canvas = this.setupCanvas();
     this.context = this.canvas.getContext('2d')
-    this.cursor = new Cursor
+    this.cursor = new Cursor ()
   }
 
   public async run() {

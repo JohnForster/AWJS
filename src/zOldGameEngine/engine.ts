@@ -21,9 +21,9 @@ export default class Engine {
   public cursor: Cursor;
 
   constructor() {
-    this.cursor = new Cursor
-    this.renderer = new Renderer(this.cursor)
-    this.controller = new Controller(this.cursor)
+    this.cursor = new Cursor ()
+    this.renderer = new Renderer (this.cursor)
+    this.controller = new Controller (this.cursor)
     this.renderer.loadMap(map)
   }
 

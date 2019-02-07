@@ -7,12 +7,12 @@ export default class Controller {
   // This allows us to easily change the keybindings programatically
   // Could reverse order, so that actions can be looked up via keycode rather
   // Than the other way round? Allows for a generic handleKeyPress method?
-  // keyMappings: {[keyName: string]: number} = {
-  //   upCode: 87,   // W
-  //   downCode: 83, // S
-  //   leftCode: 65, // A
-  //   rightCode: 68, // D
-  // }
+  private keyMappings: {[keyName: string]: number} = {
+    upCode: 87,   // W
+    downCode: 83, // S
+    leftCode: 65, // A
+    rightCode: 68, // D
+  }
 
   // Extend to use GameObject instead of Cursor so multiple things can be moved?
   // GameObject could be an interface that uses a move method?
@@ -29,7 +29,6 @@ export default class Controller {
     // Stores an object of {<keyCode>: true, <keyCode2>: false} for example.
 
     this.pressedKeys[e.keyCode] = (e.type === 'keydown')
-    console.log()
     for (const keyCode in this.pressedKeys) {
       // Skip this loop if the key is from prototype
       if (!this.pressedKeys.hasOwnProperty(keyCode)) { continue; }

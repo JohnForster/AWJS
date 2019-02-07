@@ -4,4 +4,4 @@ export default new class App {
   public run() {
     const engine = new Engine()
   }
-}
+} ()

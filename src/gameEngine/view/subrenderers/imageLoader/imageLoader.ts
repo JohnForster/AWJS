@@ -6,8 +6,10 @@ export default class ImageLoader {
       const spritesheet = await ImageLoader.addImageProcess(spritesheetData.path) as HTMLImageElement
       const tempContext = ImageLoader.getContext(spritesheet)
       for (const id in spritesheetData.data.sprites) {
-        const sprite = spritesheetData.data.sprites[id]
-        sprite.imageData = ImageLoader.getImageData(sprite, tempContext)
+        if (spritesheetData.data.sprites.hasOwnProperty(id)) {
+          const sprite = spritesheetData.data.sprites[id]
+          sprite.imageData = ImageLoader.getImageData(sprite, tempContext)
+        }
       }
     })
   }
@@ -35,7 +37,10 @@ export default class ImageLoader {
     });
   }
 
-  public static getImageData(sprite: ISpritesheetData['data']['sprites'][0], context: CanvasRenderingContext2D): ImageData {
+  public static getImageData(
+    sprite: ISpritesheetData['data']['sprites'][0],
+    context: CanvasRenderingContext2D,
+  ): ImageData {
     const {x, y, w, h} = sprite
     return context.getImageData(x, y, w, h)
   }

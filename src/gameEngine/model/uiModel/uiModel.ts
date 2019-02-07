@@ -31,7 +31,11 @@ export default class UIModel {
     // this.currentUIState.gridElements[y][x] = this.selectedObject.id // Awful code
   }
 
-  public create <T extends UIObject>(UIObjectClass: new(x: number, y: number, z: number, ...args: any) => T, args: { x: number, y: number, z: number }, setupFn?: Function) {
+  public create <T extends UIObject>(
+    UIObjectClass: new(x: number, y: number, z: number, ...args: any) => T,
+    args: { x: number, y: number, z: number },
+    setupFn?: (object: T) => void,
+  ) {
     const {x, y, z} = args
     const object = new UIObjectClass(x, y, z)
     if (setupFn) { setupFn(object) } // Probably a better way of doing this
