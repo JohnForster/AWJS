@@ -1,8 +1,13 @@
-import IScreenObjects from '../IScreenObjects'
+import IScreenObjects from '../IScreenObject'
 import IGameState from '../logicModel/IGameState'
 import LogicModel from '../logicModel/logicModel'
+import IUIState, {uiStates} from './IUIState'
 import Cursor from './uiObjects/cursor/cursor'
 import UIObject from './uiObjects/uiObject'
+
+import findUnit from '../../utils/findUnit'
+import unitSelector from './unitSelector/unitSelector'
+import Unit from '../logicModel/unit/unit';
 
 // This class is responsible for manipulating the UI state. Moving cursor around,
 //  selecting units, checking units etc.
@@ -10,23 +15,32 @@ import UIObject from './uiObjects/uiObject'
 // This code is bad.
 export default class UIModel {
   // TODO Where do we get the grid size from?
-  public currentUIState: IScreenObjects = {elements: []}
+  // public currentUIState: IScreenObjects = {elements: []}
+  public currentUIState: IUIState = {state: uiStates.inGame, elements: []}
+  public logicModel: LogicModel
   public gameState: IGameState
   public selectedObject: UIObject
+  public focussedUnit: Unit
   public objects: UIObject[] = []
   public cursor: UIObject
 
   constructor(logicModel: LogicModel) {
+    this.logicModel = logicModel
     this.gameState = logicModel.getState()
     this.cursor = this.createObject(Cursor, {x: 0, y: 0, z: 0})
-    this.select(this.cursor)
+    this.selectedObject = this.cursor
     this.refreshState()
   }
 
-  public send(instruction: string) {
-    this.selectedObject.sendInstruction(instruction)
-    const {x, y} = this.selectedObject.position
+  public sendInstruction(instruction: string) {
+    if (instruction === 'A') {
+      this.selectWithCursor()
+    } else {
+      this.cursor.sendInstruction(instruction)
+    }
+    // const {x, y} = this.selectedObject.position
     this.refreshState()
+
     // Why would we change gridElements while sending an element an instruction?
     // this.currentUIState.gridElements[y][x] = this.selectedObject.id // Awful code
   }
@@ -55,7 +69,7 @@ export default class UIModel {
       this.currentUIState.elements.push({id, isVisible, ...position})
     })
 
-    return
+    return this.currentUIState
     /*
     // Remove this once it is no longer relevant
     // Converts objects into a grid
@@ -67,11 +81,35 @@ export default class UIModel {
     */
   }
 
-  public getState(): IScreenObjects {
+  public getState(): IUIState {
     return this.currentUIState
   }
 
-  public select <T extends UIObject>(uiObject?: T) {
-    this.selectedObject = uiObject ? uiObject : this.cursor
+  // public select <T extends UIObject>(uiObject?: T) {
+  //   this.selectedObject = uiObject ? uiObject : this.cursor
+  // }
+
+  public selectWithCursor() {
+    return this.select(this.cursor.position.x, this.cursor.position.y)
+  }
+
+  public select(x: number, y: number) {
+    // This method is called either on a click, or on pushing the
+    // select key.
+    // It will contain the logic of how to handle the input.
+
+    // inGame is the regular game state.
+    if (this.currentUIState.state === uiStates.inGame) {
+      const selectedUnit = findUnit(this.gameState, x, y)
+      if (selectedUnit) {
+        this.setState(unitSelector(this.currentUIState, selectedUnit))
+        console.log(selectedUnit)
+      }
+      return selectedUnit
+    }
+  }
+
+  private setState(uiState: IUIState) {
+    this.currentUIState = uiState
   }
 }

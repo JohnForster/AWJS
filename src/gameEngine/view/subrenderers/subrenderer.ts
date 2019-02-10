@@ -1,5 +1,5 @@
 import ISpritesheetData from 'src/assets/ISpritesheetData'
-import IScreenObjects from '../../model/IScreenObjects'
+import IScreenObject from '../../model/IScreenObject'
 
 export default class Subrenderer {
 
@@ -31,7 +31,7 @@ export default class Subrenderer {
     this.sprites = spritesheetData.data.sprites
   }
 
-  public render(screenObjects?: IScreenObjects): HTMLCanvasElement {
+  public render(screenObjects?: IScreenObject[]): HTMLCanvasElement {
 
     // Return the cached canvas if no new state has been given
     if (!screenObjects) { return this.cachedCanvas }
@@ -53,7 +53,7 @@ export default class Subrenderer {
     //     })
     //   })
     // }
-    screenObjects.elements.forEach((element) => {
+    screenObjects.forEach((element) => {
       if (!element.isVisible) { return }
       const sprite = this.sprites[element.id]
       const x = element.x * 16 + (sprite.ax || 0)

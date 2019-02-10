@@ -25,7 +25,7 @@ export default class Engine {
       this.uiModel,
       { terrain: terrainsheetData, ui: uisheetData, units: unitsheetData },
     )
-    this.controller = new Controller(this.uiModel) // And this.view if using mouse input?
+    this.controller = new Controller(this.uiModel, this.view) // And this.view if using mouse input?
 
     this.performAsyncSetup()
   }

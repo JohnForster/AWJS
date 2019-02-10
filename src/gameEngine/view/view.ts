@@ -1,6 +1,7 @@
 import ISpritesheetData from '../../assets/ISpritesheetData'
-import IScreenObjects from '../model/IScreenObjects'
+import IScreenObject from '../model/IScreenObject'
 import LogicModel from '../model/logicModel/logicModel'
+import IUIState from '../model/uiModel/IUIState'
 import UIModel from '../model/uiModel/uiModel'
 import GameStateParser from './gameStateParser/gameStateParser'
 import BgRenderer from './subrenderers/bgRenderer/bgRenderer'
@@ -53,22 +54,22 @@ export default class View {
     })
   }
 
-  private renderGame(terrainScreenObjects: IScreenObjects, unitScreenObjects: IScreenObjects): HTMLCanvasElement[] {
+  private renderGame(terrainScreenObjects: IScreenObject[], unitScreenObjects: IScreenObject[]): HTMLCanvasElement[] {
     return [
       this.bgRenderer.render(terrainScreenObjects),
       this.unitRenderer.render(unitScreenObjects),
     ]
   }
 
-  private renderUI(uiState: IScreenObjects): HTMLCanvasElement {
-    return this.uiRenderer.render(uiState)
+  private renderUI(uiState: IUIState): HTMLCanvasElement {
+    return this.uiRenderer.render(uiState.elements)
   }
 
   private getGameState() {
     return this.logicModel.getState()
   }
 
-  private getUIState() {
+  private getUIState(): IUIState {
     return this.uiModel.getState()
   }
 
