@@ -54,8 +54,9 @@ export default class Subrenderer {
     //   })
     // }
     screenObjects.elements.forEach((element) => {
+      if (!element.isVisible) { return }
       const sprite = this.sprites[element.id]
-      const x = element.x * 16 + (sprite.ax || 0) // Tile width (get from where?)
+      const x = element.x * 16 + (sprite.ax || 0)
       const y = element.y * 16 + (sprite.ay || 0)
       this.context.putImageData(sprite.imageData, x + 8, y + 8)
     })

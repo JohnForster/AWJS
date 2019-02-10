@@ -15,6 +15,7 @@
 // uiModel.chooseMap(23456)
 // uiModel.state // confirmMap options: Begin Game, back
 // uiModel.choose('Begin game')
+
 // uiModel.state // inGame, uiState = { cursorLocation: [0,1], hoverUnit: tank3 }
 // uiModel.checkAttackRange(tank3) // Return array of coordinates? Return UIState { [[0, 1, 1, 1, 0],]}?
 // uiModel.getStats(apc2) // => { id: 434, team: 1, health: 56, fuel: 30, ammo: 0 }

@@ -6,6 +6,7 @@ export default abstract class UIObject {
   }
   public name: string
   public id: number
+  public isVisible: boolean = true
 
   public instructions: { [key: string]: () => void } = {
     up: () => {},

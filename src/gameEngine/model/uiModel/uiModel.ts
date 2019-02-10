@@ -18,7 +18,7 @@ export default class UIModel {
 
   constructor(logicModel: LogicModel) {
     this.gameState = logicModel.getState()
-    this.cursor = this.create(Cursor, {x: 0, y: 0, z: 0})
+    this.cursor = this.createObject(Cursor, {x: 0, y: 0, z: 0})
     this.select(this.cursor)
     this.refreshState()
   }
@@ -31,7 +31,7 @@ export default class UIModel {
     // this.currentUIState.gridElements[y][x] = this.selectedObject.id // Awful code
   }
 
-  public create <T extends UIObject>(
+  public createObject <T extends UIObject>(
     UIObjectClass: new(x: number, y: number, z: number, ...args: any) => T,
     args: { x: number, y: number, z: number },
     setupFn?: (object: T) => void,
@@ -51,8 +51,8 @@ export default class UIModel {
       return a.position.z - b.position.z
     })
 
-    this.objects.forEach(({position, id}) => {
-      this.currentUIState.elements.push({id, ...position})
+    this.objects.forEach(({position, id, isVisible}) => {
+      this.currentUIState.elements.push({id, isVisible, ...position})
     })
 
     return
