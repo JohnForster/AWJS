@@ -6,8 +6,8 @@ import Cursor from './uiObjects/cursor/cursor'
 import UIObject from './uiObjects/uiObject'
 
 import findUnit from '../../utils/findUnit'
+import Unit from '../logicModel/unit/unit'
 import unitSelector from './unitSelector/unitSelector'
-import Unit from '../logicModel/unit/unit';
 
 // This class is responsible for manipulating the UI state. Moving cursor around,
 //  selecting units, checking units etc.

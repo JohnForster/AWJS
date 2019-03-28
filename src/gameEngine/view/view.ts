@@ -49,7 +49,6 @@ export default class View {
   private paintToMainCanvas(...canvases: HTMLCanvasElement[]) {
     this.mainContext.clearRect(0, 0, this.mainCanvas.width, this.mainCanvas.height)
     canvases.forEach((canvas) => {
-      // TODO If you are wondering why the elements are off-line, see todo in Subrenderer.render
       this.mainContext.drawImage(canvas, 0, 0)
     })
   }

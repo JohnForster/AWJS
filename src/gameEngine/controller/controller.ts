@@ -16,10 +16,10 @@ export default class Controller {
   constructor(uiModel: UIModel, view: View) {
     this.uiModel = uiModel
     this.view = view
-    document.onkeypress = this.handleKeyPress.bind(this)
+    document.onkeypress = this.handleKeyPress
   }
 
-  public handleKeyPress(e: KeyboardEvent) {
+  public handleKeyPress = (e: KeyboardEvent) => {
     // Think of a solution to deal with multiple key presses? (Eg. holding B to see the range
     //  of the unit, and using the arrow keys to navigate around the map?)
     const input = this.keyMappings[e.key.toLowerCase()]

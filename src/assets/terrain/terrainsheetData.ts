@@ -19,6 +19,13 @@ const terrainsheetData: ISpritesheetData = {
         w: 16,
         h: 16,
       },
+      2: {
+        name: 'woods',
+        x: 444,
+        y: 1567,
+        w: 16,
+        h: 16,
+      },
       // etc. etc.
     },
   },
