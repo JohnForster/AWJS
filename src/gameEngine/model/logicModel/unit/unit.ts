@@ -14,7 +14,6 @@ export default class Unit {
   public loadedUnits: Unit[] = []
   public hidden: boolean = false
 
-
   constructor(unitType: IUnit, playerId: number, x: number, y: number) {
     this.id = Unit.numberOfUnits++
     this.type = unitType

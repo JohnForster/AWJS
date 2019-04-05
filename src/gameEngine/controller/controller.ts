@@ -1,11 +1,15 @@
 import UIModel from '../model/uiModel/uiModel'
 import View from '../view/view'
+import controllerParser from './controllerParser/controllerParser'
+import ControllerParser from './controllerParser/controllerParser'
+import inputs from './input'
 
 export default class Controller {
+
   public uiModel: UIModel
   public view: View
 
-  public keyMappings: {[keyname: string]: string} = {
+  public keyMappings: {[keyname: string]: inputs} = {
     'w': 'up', // w
     's': 'down', // s
     'a': 'left', // a
@@ -13,19 +17,21 @@ export default class Controller {
     ' ': 'A', // space
   }
 
+  private controllerParser: ControllerParser
+
   constructor(uiModel: UIModel, view: View) {
     this.uiModel = uiModel
     this.view = view
+    this.controllerParser = new ControllerParser(uiModel)
     document.onkeypress = this.handleKeyPress
   }
 
+  // TODO multiple simultaneous key presses?
   public handleKeyPress = (e: KeyboardEvent) => {
-    // Think of a solution to deal with multiple key presses? (Eg. holding B to see the range
-    //  of the unit, and using the arrow keys to navigate around the map?)
     const input = this.keyMappings[e.key.toLowerCase()]
-    if (input) {
-      this.uiModel.sendInstruction(input)
-    }
+    if (!input) { return }
+    const currentUIContext = this.uiModel.currentUIState.context
+    this.controllerParser.send(input, currentUIContext, () => {})
   }
 
   // public handleClick(e: MouseEvent) {

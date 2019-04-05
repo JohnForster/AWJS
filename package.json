@@ -3,7 +3,7 @@
     "build": "yarn webpack",
     "host": "yarn webpack-dev-server --mode=development",
     "start": "yarn webpack-dev-server --mode=development",
-    "lint": "tslint -c tslint.json 'src/**/*.ts'"
+    "lint": "tslint -c tslint.json --project './tsconfig.json'"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^1.0.0",

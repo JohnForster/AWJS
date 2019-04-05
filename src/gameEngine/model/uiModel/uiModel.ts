@@ -1,7 +1,7 @@
 import IScreenObjects from '../IScreenObject'
 import IGameState from '../logicModel/IGameState'
 import LogicModel from '../logicModel/logicModel'
-import IUIState, {uiStates} from './IUIState'
+import IUIState, {uiContexts} from './IUIState'
 import Cursor from './uiObjects/cursor/cursor'
 import UIObject from './uiObjects/uiObject'
 
@@ -16,7 +16,7 @@ import unitSelector from './unitSelector/unitSelector'
 export default class UIModel {
   // TODO Where do we get the grid size from?
   // public currentUIState: IScreenObjects = {elements: []}
-  public currentUIState: IUIState = {state: uiStates.inGame, elements: []}
+  public currentUIState: IUIState = {context: 'inGame', elements: []}
   public logicModel: LogicModel
   public gameState: IGameState
   public selectedObject: UIObject
@@ -32,18 +32,18 @@ export default class UIModel {
     this.refreshState()
   }
 
-  public sendInstruction(instruction: string) {
-    if (instruction === 'A') {
-      this.selectWithCursor()
-    } else {
-      this.cursor.sendInstruction(instruction)
-    }
-    // const {x, y} = this.selectedObject.position
-    this.refreshState()
+  // public sendInstruction(instruction: string) {
+  //   if (instruction === 'A') {
+  //     this.selectWithCursor()
+  //   } else {
+  //     this.cursor.sendInstruction(instruction)
+  //   }
+  //   // const {x, y} = this.selectedObject.position
+  //   this.refreshState()
 
-    // Why would we change gridElements while sending an element an instruction?
-    // this.currentUIState.gridElements[y][x] = this.selectedObject.id // Awful code
-  }
+  //   // Why would we change gridElements while sending an element an instruction?
+  //   // this.currentUIState.gridElements[y][x] = this.selectedObject.id // Awful code
+  // }
 
   public createObject <T extends UIObject>(
     UIObjectClass: new(x: number, y: number, z: number, ...args: any) => T,
@@ -89,24 +89,26 @@ export default class UIModel {
   //   this.selectedObject = uiObject ? uiObject : this.cursor
   // }
 
+  public moveCursor(direction: string) {
+    this.cursor.sendInstruction(direction)
+    this.refreshState()
+  }
+
   public selectWithCursor() {
-    return this.select(this.cursor.position.x, this.cursor.position.y)
+    // This method is called either on a click, or on pushing the
+    // select key.
+    const selectedUnit = findUnit(this.gameState, this.cursor.position.x, this.cursor.position.y)
+    if (selectedUnit) {
+      this.setState(unitSelector(this.currentUIState, selectedUnit))
+      console.log(selectedUnit)
+    }
+    return selectedUnit
   }
 
   public select(x: number, y: number) {
-    // This method is called either on a click, or on pushing the
-    // select key.
     // It will contain the logic of how to handle the input.
 
     // inGame is the regular game state.
-    if (this.currentUIState.state === uiStates.inGame) {
-      const selectedUnit = findUnit(this.gameState, x, y)
-      if (selectedUnit) {
-        this.setState(unitSelector(this.currentUIState, selectedUnit))
-        console.log(selectedUnit)
-      }
-      return selectedUnit
-    }
   }
 
   private setState(uiState: IUIState) {
